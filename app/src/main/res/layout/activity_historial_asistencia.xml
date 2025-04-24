@@ -5,195 +5,214 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HistorialAsistenciaActivity"
-    android:padding="16dp">
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_worktrace"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Historial de Asistencia (Administrador)"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvUsuario"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/tvUsuarioLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Usuario"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <AutoCompleteTextView
-                android:id="@+id/etUsuario"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Seleccione un usuario"
-                android:completionThreshold="1"
-                android:padding="8dp"
-                android:background="@color/light_gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvUsuarioLabel" />
-
-            <ImageView
-                android:id="@+id/ivDropdown"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_dropdown"
-                app:layout_constraintBottom_toBottomOf="@+id/etUsuario"
-                app:layout_constraintEnd_toEndOf="@+id/etUsuario"
-                app:layout_constraintTop_toTopOf="@+id/etUsuario"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="Dropdown" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvFechas"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvUsuario">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/tvFechasLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rango de fechas"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnRangoFechas"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Seleccionar rango"
-                app:icon="@drawable/ic_calendar"
-                app:iconGravity="start"
-                android:gravity="start|center_vertical"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvFechasLabel" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_dropdown"
-                app:layout_constraintBottom_toBottomOf="@+id/btnRangoFechas"
-                app:layout_constraintEnd_toEndOf="@+id/btnRangoFechas"
-                app:layout_constraintTop_toTopOf="@+id/btnRangoFechas"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="Dropdown" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvAsistencias"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvFechas">
+        android:padding="24dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvUsuario"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                android:id="@+id/llHeaders"
-                android:layout_width="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                android:background="@color/light_gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/tvFechaInicio"
+                    android:id="@+id/tvUsuarioLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Usuario"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/etUsuario"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Fecha"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_weight="1" />
+                    android:hint="Seleccione un usuario"
+                    android:completionThreshold="1"
+                    android:padding="12dp"
+                    android:background="@color/light_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvUsuarioLabel" />
+
+                <ImageView
+                    android:id="@+id/ivDropdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_dropdown"
+                    app:layout_constraintBottom_toBottomOf="@+id/etUsuario"
+                    app:layout_constraintEnd_toEndOf="@+id/etUsuario"
+                    app:layout_constraintTop_toTopOf="@+id/etUsuario"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="Dropdown" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvFechas"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cvUsuario">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/tvFechaFin"
+                    android:id="@+id/tvFechasLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rango de fechas"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRangoFechas"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Entrada"
-                    android:textSize="16sp"
+                    android:text="Seleccionar rango"
+                    app:icon="@drawable/ic_calendar"
+                    app:iconGravity="start"
+                    android:gravity="start|center_vertical"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_weight="1" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFechasLabel" />
 
-                <TextView
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_dropdown"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnRangoFechas"
+                    app:layout_constraintEnd_toEndOf="@+id/btnRangoFechas"
+                    app:layout_constraintTop_toTopOf="@+id/btnRangoFechas"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="Dropdown" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvAsistencias"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="80dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cvFechas">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/llHeaders"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Estado"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_weight="1"
-                    android:gravity="center" />
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:background="@color/light_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tvFechaInicio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_weight="1" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvAsistencias"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/llHeaders"
-                tools:listitem="@layout/item_asistencia" />
+                    <TextView
+                        android:id="@+id/tvFechaFin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Entrada"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_weight="1" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Estado"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_weight="1"
+                        android:gravity="center" />
 
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAsistencias"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/llHeaders"
+                    tools:listitem="@layout/item_asistencia" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAtras"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="ATRÁS"
+            android:textSize="16sp"
+            android:padding="14dp"
+            app:cornerRadius="8dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cvAsistencias" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout> 

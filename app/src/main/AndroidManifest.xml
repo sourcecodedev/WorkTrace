@@ -10,12 +10,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WorkTrace"
+        android:theme="@style/Theme.WorkTrace.NoActionBar"
+        android:hardwareAccelerated="true"
+        android:largeHeap="true"
         tools:targetApi="31">
 
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,35 +28,45 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" 
+            android:launchMode="singleTop"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
             android:name=".TrabajadoresActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".DetallesTrabajadorActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".EditarTrabajadorActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".AgregarTrabajadorActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".AsignarHorariosActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".HistorialAsistenciaActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ExportarReporteActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
     </application>
 

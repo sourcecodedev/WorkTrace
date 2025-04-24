@@ -2,8 +2,11 @@ package com.upc.worktrace
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 
@@ -15,6 +18,11 @@ class LoginActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Configurar la barra de estado
+        window.statusBarColor = ContextCompat.getColor(this, android.R.color.transparent)
+        WindowCompat.setDecorFitsSystemWindows(window, true)
+        
         setContentView(R.layout.activity_login)
         
         // Inicializar vistas
@@ -50,10 +58,17 @@ class LoginActivity : AppCompatActivity() {
         // Aquí iría la validación real contra una API o base de datos
         // Por ahora, simplemente verificamos si es "admin"/"admin" para simular
         if (usuario == "admin" && password == "admin") {
-            // Login exitoso
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish() // Cerramos esta actividad para que el usuario no pueda volver atrás
+            try {
+                // Login exitoso
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish() // Cerramos esta actividad para que el usuario no pueda volver atrás
+            } catch (e: Exception) {
+                // Capturar cualquier excepción que pueda ocurrir durante la navegación
+                Toast.makeText(this, "Error al cargar la pantalla principal: ${e.message}", Toast.LENGTH_LONG).show()
+                e.printStackTrace()
+            }
         } else {
             // Login fallido
             Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()

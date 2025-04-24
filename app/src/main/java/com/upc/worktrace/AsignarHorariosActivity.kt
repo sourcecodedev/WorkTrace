@@ -5,14 +5,13 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.CheckBox
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AsignarHorariosActivity : AppCompatActivity() {
+class AsignarHorariosActivity : BaseActivity() {
     
     private lateinit var etNombreTrabajador: AutoCompleteTextView
     private lateinit var cbLunes: CheckBox
@@ -20,6 +19,7 @@ class AsignarHorariosActivity : AppCompatActivity() {
     private lateinit var btnHoraEntrada: MaterialButton
     private lateinit var btnHoraSalida: MaterialButton
     private lateinit var btnGuardar: MaterialButton
+    private lateinit var btnCancelar: MaterialButton
     
     // Lista simulada de trabajadores
     private val trabajadores = listOf("Yhimy Feria", "Ana Torres")
@@ -28,6 +28,9 @@ class AsignarHorariosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_asignar_horarios)
         
+        // Configurar la barra superior
+        setupToolbar(true, "Asignar Horario")
+        
         // Inicializar vistas
         etNombreTrabajador = findViewById(R.id.etNombreTrabajador)
         cbLunes = findViewById(R.id.cbLunes)
@@ -35,6 +38,7 @@ class AsignarHorariosActivity : AppCompatActivity() {
         btnHoraEntrada = findViewById(R.id.btnHoraEntrada)
         btnHoraSalida = findViewById(R.id.btnHoraSalida)
         btnGuardar = findViewById(R.id.btnGuardar)
+        btnCancelar = findViewById(R.id.btnCancelar)
         
         // Configurar el AutoCompleteTextView con la lista de trabajadores
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, trabajadores)
@@ -52,6 +56,12 @@ class AsignarHorariosActivity : AppCompatActivity() {
         // Configurar el botón de guardar
         btnGuardar.setOnClickListener {
             guardarHorario()
+        }
+        
+        // Configurar el botón de cancelar
+        btnCancelar.setOnClickListener {
+            // Simplemente cerramos la actividad para volver a la anterior
+            finish()
         }
     }
     

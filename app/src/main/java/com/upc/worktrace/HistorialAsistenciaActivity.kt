@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
@@ -12,13 +11,14 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HistorialAsistenciaActivity : AppCompatActivity() {
+class HistorialAsistenciaActivity : BaseActivity() {
     
     private lateinit var etUsuario: AutoCompleteTextView
     private lateinit var btnRangoFechas: MaterialButton
     private lateinit var rvAsistencias: RecyclerView
     private lateinit var tvFechaInicio: TextView
     private lateinit var tvFechaFin: TextView
+    private lateinit var btnAtras: MaterialButton
     
     // Lista simulada de trabajadores
     private val trabajadores = listOf("Yhimy Feria", "Ana Torres")
@@ -33,12 +33,16 @@ class HistorialAsistenciaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_historial_asistencia)
         
+        // Configurar la barra superior
+        setupToolbar(true, "Historial de Asistencia")
+        
         // Inicializar vistas
         etUsuario = findViewById(R.id.etUsuario)
         btnRangoFechas = findViewById(R.id.btnRangoFechas)
         rvAsistencias = findViewById(R.id.rvAsistencias)
         tvFechaInicio = findViewById(R.id.tvFechaInicio)
         tvFechaFin = findViewById(R.id.tvFechaFin)
+        btnAtras = findViewById(R.id.btnAtras)
         
         // Configurar el AutoCompleteTextView con la lista de trabajadores
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, trabajadores)
@@ -47,6 +51,12 @@ class HistorialAsistenciaActivity : AppCompatActivity() {
         // Configurar el botón para seleccionar rango de fechas
         btnRangoFechas.setOnClickListener {
             mostrarSelectorFechas()
+        }
+        
+        // Configurar el botón atrás
+        btnAtras.setOnClickListener {
+            // Simplemente cerramos la actividad para volver a la anterior
+            finish()
         }
         
         // Configurar el RecyclerView
