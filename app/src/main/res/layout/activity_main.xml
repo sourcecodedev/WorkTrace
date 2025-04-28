@@ -29,13 +29,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="Logo de WorkTrace" />
+            android:contentDescription="@string/item_main_content_description" />
 
         <TextView
             android:id="@+id/tvAppName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="WorkTrace"
+            android:text="@string/app_name"
             android:textSize="42sp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -48,7 +48,7 @@
             android:id="@+id/tvMenuTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Menú Principal (Administrador)"
+            android:text="@string/item_main_menu_title"
             android:textSize="20sp"
             android:textColor="@color/dark_gray"
             android:layout_marginTop="24dp"
@@ -80,12 +80,12 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="Icono de trabajadores" />
+                    android:contentDescription="@string/item_main_menu_ImageView_ico_Workers" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Gestionar Trabajadores"
+                    android:text="@string/item_main_menu_TextView_Workers"
                     android:textSize="22sp"
                     android:textColor="@color/black"
                     android:layout_marginStart="16dp"
@@ -121,12 +121,12 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="Icono de calendario" />
+                    android:contentDescription="@string/item_main_menu_ImageView_ico_Calendar" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Asignar Horarios"
+                    android:text="@string/item_main_menu_TextView_Calendar"
                     android:textSize="22sp"
                     android:textColor="@color/black"
                     android:layout_marginStart="16dp"
@@ -162,12 +162,12 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="Icono de reloj" />
+                    android:contentDescription="@string/item_main_menu_ImageView_ico_clock" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Ver Asistencia"
+                    android:text="@string/item_main_menu_TextView_clock"
                     android:textSize="22sp"
                     android:textColor="@color/black"
                     android:layout_marginStart="16dp"
@@ -203,12 +203,12 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="Icono de exportar" />
+                    android:contentDescription="@string/item_main_menu_ImageView_ico_export" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Exportar Reporte"
+                    android:text="@string/item_main_menu_TextView_export"
                     android:textSize="22sp"
                     android:textColor="@color/black"
                     android:layout_marginStart="16dp"

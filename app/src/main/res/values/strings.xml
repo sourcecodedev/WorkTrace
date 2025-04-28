@@ -1,3 +1,84 @@
 <resources>
     <string name="app_name">WorkTrace</string>
+    <string name="item_work_content_description">Ver detalles</string>
+
+    <string name="item_login_logo_content_description">Logo de WorkTrace</string>
+    <string name="item_login_input_user">Usuario</string>
+    <string name="item_login_input_password">Contraseña</string>
+    <string name="item_login_btn_ingresar">Contraseña</string>
+
+    <string name="item_main_content_description">Logo de WorkTrace</string>
+    <string name="item_main_menu_title">Menú Principal (Administrador)</string>
+    <string name="item_main_menu_ImageView_ico_Workers">Icono de trabajadores</string>
+    <string name="item_main_menu_TextView_Workers">Gestionar Trabajadores</string>
+    <string name="item_main_menu_ImageView_ico_Calendar">Icono de calendario</string>
+    <string name="item_main_menu_TextView_Calendar">Asignar Horarios</string>
+    <string name="item_main_menu_ImageView_ico_clock">Icono de reloj</string>
+    <string name="item_main_menu_TextView_clock">Ver Asistencia</string>
+    <string name="item_main_menu_ImageView_ico_export">Icono de exportar</string>
+    <string name="item_main_menu_TextView_export">Exportar Reporte</string>
+
+    <string name="item_work_register_title">TRABAJADORES REGISTRADOS</string>
+    <string name="item_work_register_TextView_name">Nombre</string>
+    <string name="item_work_register_TextView_detail">Ver Detalle</string>
+    <string name="item_work_register_RecyclerView_work">trabajador</string>
+    <string name="item_work_register_btn_back">ATRÁS</string>
+    <string name="item_work_register_btn_add">+ AGREGAR</string>
+
+    <!-- #HistorialAsistenciaActivity -->
+    <string name="item_assistance_history_textView_title">Usuario</string>
+    <string name="item_assistance_history_AutoCompleteTextView_hint">Seleccione un usuario</string>
+    <string name="item_assistance_history_ImageView_content_description">Dropdown</string>
+    <string name="item_assistance_history_TextView_date_range">Rango de fechas</string>
+    <string name="item_assistance_history_Button_date_range">Seleccionar rango</string>
+    <string name="item_assistance_history_ImageView_Dropdown_date_range">Dropdown</string>
+    <string name="item_assistance_history_TextView_date_Init">Fecha</string>
+    <string name="item_assistance_history_TextView_date_End">Entrada</string>
+    <string name="item_assistance_history_TextView_Status">Estado</string>
+    <string name="item_assistance_history_RecyclerView_Assistance">Estado</string>
+    <string name="item_assistance_history_TextView_return">ATRÁS</string>
+
+    <!-- #editworker -->
+    <string name="item_editworker_textView_Title">Editar Trabajador</string>
+    <string name="item_editworker_textView_input_Id">ID</string>
+    <string name="item_editworker_textView_input_Name">Nombre</string>
+    <string name="item_editworker_Button_input_Name">CANCELAR</string>
+    <string name="item_editworker_Button_input_delete">ELIMINAR TRABAJADOR</string>
+    <string name="item_editworker_Button_input_save">ACTUALIZAR</string>
+
+    <!-- #Detalles trabajador -->
+    <string name="item_Detail_worker_textView_Id">Id</string>
+    <string name="item_Detail_worker_textView_input_Id">1234</string>
+    <string name="item_Detail_worker_textView_Name">Name</string>
+    <string name="item_Detail_worker_textView_input_Name">YhimyW.Feria</string>
+    <string name="item_Detail_worker_Button_Name">ATRÁS</string>
+    <string name="item_Detail_worker_Button_Edit">EDITAR</string>
+
+    <!-- #Asignar Horario - assign schedule-->
+    <string name="item_assign_schedule_textView_input_lblName">Nombre del Trabajador</string>
+    <string name="item_assign_schedule_textView_input_Name">Seleccione un trabajador</string>
+    <string name="item_assign_schedule_textView_input_work">Días de trabajo</string>
+    <string name="item_assign_schedule_CheckBox_input_Monday">Lunes</string>
+    <string name="item_assign_schedule_tCheckBox_input_Tuesday">Martes</string>
+    <string name="item_assign_schedule_CheckBox_input_Wednesday">Miercoles</string>
+    <string name="item_assign_schedule_CheckBox_input_Thursday">Jueves</string>
+    <string name="item_assign_schedule_CheckBox_input_Friday">Viernes</string>
+    <string name="item_assign_schedule_CheckBox_input_Saturday">Sabado</string>
+    <string name="item_assign_schedule_CheckBox_input_Sundays">Domingos</string>
+
+
+    <string name="item_assign_schedule_TextView_input_Schedule">Horario</string>
+    <string name="item_assign_schedule_Button_input_Check_in">08:30</string>
+    <string name="item_assign_schedule_Button_input_Check_out">17:30</string>
+    <string name="item_assign_schedule_Button_input_Check_cancel">CANCELAR</string>
+    <string name="item_assign_schedule_Button_input_Check_save">GUARDAR</string>
+
+
+    <string name="item_add_work_TextView_RequiredFields">* Campos obligatorios</string>
+    <string name="item_add_work_TextView_input_id">ID *</string>
+    <string name="item_add_work_TextView_input_name">Name *</string>
+    <string name="item_add_work_Button_input_Cancel">CANCELAR</string>
+    <string name="item_add_work_Button_input_save">GUARDAR</string>
+
+
 </resources>

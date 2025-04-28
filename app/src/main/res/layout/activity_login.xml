@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/tvAppName"
             app:layout_constraintVertical_chainStyle="packed"
-            android:contentDescription="Logo de WorkTrace"
+            android:contentDescription="@string/item_login_logo_content_description"
             android:layout_marginTop="48dp" />
 
         <!-- Título de la app -->
@@ -36,7 +36,7 @@
             android:id="@+id/tvAppName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="WorkTrace"
+            android:text="@string/app_name"
             android:textSize="38sp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -63,7 +63,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Usuario"
+                android:hint="@string/item_login_input_user"
                 android:inputType="text"
                 android:padding="12dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -86,7 +86,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contraseña"
+                android:hint="@string/item_login_input_password"
                 android:inputType="textPassword"
                 android:padding="12dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginHorizontal="16dp"
-            android:text="INGRESAR"
+            android:text="@string/item_login_btn_ingresar"
             android:textSize="16sp"
             android:padding="14dp"
             app:cornerRadius="8dp"

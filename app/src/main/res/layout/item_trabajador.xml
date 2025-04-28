@@ -25,15 +25,15 @@
 
         <ImageButton
             android:id="@+id/btnDetalle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:src="@drawable/ic_chevron_right"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="Ver detalles" />
+            android:contentDescription="@string/item_work_content_description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

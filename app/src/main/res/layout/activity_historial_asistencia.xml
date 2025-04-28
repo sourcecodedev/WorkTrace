@@ -40,7 +40,7 @@
                     android:id="@+id/tvUsuarioLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Usuario"
+                    android:text="@string/item_assistance_history_textView_title"
                     android:textSize="18sp"
                     android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
                     android:id="@+id/etUsuario"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Seleccione un usuario"
+                    android:hint="@string/item_assistance_history_AutoCompleteTextView_hint"
                     android:completionThreshold="1"
                     android:padding="12dp"
                     android:background="@color/light_gray"
@@ -67,7 +67,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/etUsuario"
                     app:layout_constraintTop_toTopOf="@+id/etUsuario"
                     android:layout_marginEnd="8dp"
-                    android:contentDescription="Dropdown" />
+                    android:contentDescription="@string/item_assistance_history_ImageView_content_description" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -92,7 +92,7 @@
                     android:id="@+id/tvFechasLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rango de fechas"
+                    android:text="@string/item_assistance_history_TextView_date_range"
                     android:textSize="18sp"
                     android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +102,7 @@
                     android:id="@+id/btnRangoFechas"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Seleccionar rango"
+                    android:text="@string/item_assistance_history_Button_date_range"
                     app:icon="@drawable/ic_calendar"
                     app:iconGravity="start"
                     android:gravity="start|center_vertical"
@@ -120,7 +120,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/btnRangoFechas"
                     app:layout_constraintTop_toTopOf="@+id/btnRangoFechas"
                     android:layout_marginEnd="8dp"
-                    android:contentDescription="Dropdown" />
+                    android:contentDescription="@string/item_assistance_history_ImageView_Dropdown_date_range" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -157,7 +157,7 @@
                         android:id="@+id/tvFechaInicio"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Fecha"
+                        android:text="@string/item_assistance_history_TextView_date_Init"
                         android:textSize="16sp"
                         android:textColor="@color/black"
                         android:textStyle="bold"
@@ -167,7 +167,7 @@
                         android:id="@+id/tvFechaFin"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Entrada"
+                        android:text="@string/item_assistance_history_TextView_date_End"
                         android:textSize="16sp"
                         android:textColor="@color/black"
                         android:textStyle="bold"
@@ -176,7 +176,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Estado"
+                        android:text="@string/item_assistance_history_TextView_Status"
                         android:textSize="16sp"
                         android:textColor="@color/black"
                         android:textStyle="bold"
@@ -191,6 +191,7 @@
                     android:layout_height="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:contentDescription="@string/item_assistance_history_RecyclerView_Assistance"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/llHeaders"
                     tools:listitem="@layout/item_asistencia" />
@@ -202,7 +203,7 @@
             android:id="@+id/btnAtras"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ATRÁS"
+            android:text="@string/item_assistance_history_TextView_return"
             android:textSize="16sp"
             android:padding="14dp"
             app:cornerRadius="8dp"
