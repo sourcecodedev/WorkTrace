@@ -3,8 +3,11 @@ package com.upc.worktrace
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.google.android.material.card.MaterialCardView
+import androidx.appcompat.widget.Toolbar
 
 class MainActivity : BaseActivity() {
     
@@ -19,8 +22,8 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         try {
             setContentView(R.layout.activity_main)
-            
-            // Configurar la barra superior
+            val toolbar = findViewById<Toolbar>(R.id.toolbar_worktrace)
+            setSupportActionBar(toolbar)
             setupToolbar(false)
             
             // Inicializar vistas
@@ -28,6 +31,13 @@ class MainActivity : BaseActivity() {
             
             // Configurar listeners
             setupClickListeners()
+
+            val btnCerrarSesion = findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCerrarSesion)
+            btnCerrarSesion.setOnClickListener {
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+            }
         } catch (e: Exception) {
             Log.e(TAG, "Error al inicializar MainActivity: ${e.message}")
             e.printStackTrace()
@@ -75,6 +85,23 @@ class MainActivity : BaseActivity() {
         cvExportarReporte.setOnClickListener {
             val intent = Intent(this, ExportarReporteActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_logout, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_logout -> {
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 } 

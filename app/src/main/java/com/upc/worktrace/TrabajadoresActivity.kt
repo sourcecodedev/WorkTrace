@@ -35,7 +35,7 @@ class TrabajadoresActivity : BaseActivity() {
                 val idExistente = data.getBooleanExtra("ID_EXISTENTE", false)
                 
                 if (!id.isEmpty() && !nombre.isEmpty() && !idExistente) {
-                    val nuevoTrabajador = Trabajador(id, nombre)
+                    val nuevoTrabajador = Trabajador(id, nombre, "usuario")
                     
                     // Agregar el nuevo trabajador a la lista
                     trabajadores.add(nuevoTrabajador)
@@ -121,7 +121,7 @@ class TrabajadoresActivity : BaseActivity() {
         
         if (!existeTrabajador) {
             // Crear y agregar el nuevo trabajador
-            val nuevoTrabajador = Trabajador(id, nombre)
+            val nuevoTrabajador = Trabajador(id, nombre, "usuario")
             trabajadores.add(nuevoTrabajador)
             
             // Notificar al adaptador que se ha añadido un elemento
@@ -170,6 +170,7 @@ class TrabajadoresActivity : BaseActivity() {
         inner class TrabajadorViewHolder(itemView: android.view.View) : RecyclerView.ViewHolder(itemView) {
             private val tvNombre: android.widget.TextView = itemView.findViewById(R.id.tvNombre)
             private val btnDetalle: android.widget.ImageButton = itemView.findViewById(R.id.btnDetalle)
+            private val btnEliminar: android.widget.ImageButton = itemView.findViewById(R.id.btnEliminar)
             
             fun bind(trabajador: Trabajador) {
                 tvNombre.text = trabajador.nombre
@@ -181,6 +182,30 @@ class TrabajadoresActivity : BaseActivity() {
                 // También permitimos hacer clic en toda la fila
                 itemView.setOnClickListener {
                     onItemClick(trabajador)
+                }
+
+                btnEliminar.setOnClickListener {
+                    androidx.appcompat.app.AlertDialog.Builder(itemView.context)
+                        .setTitle("Eliminar trabajador")
+                        .setMessage("¿Estás seguro de que deseas eliminar a ${trabajador.nombre}?")
+                        .setPositiveButton("Sí") { dialog, _ ->
+                            val position = adapterPosition
+                            if (position != RecyclerView.NO_POSITION) {
+                                (trabajadores as java.util.ArrayList).removeAt(position)
+                                notifyItemRemoved(position)
+                                guardarTrabajadores()
+                                com.google.android.material.snackbar.Snackbar.make(
+                                    itemView,
+                                    "Trabajador eliminado correctamente",
+                                    com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
+                                ).show()
+                            }
+                            dialog.dismiss()
+                        }
+                        .setNegativeButton("No") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .show()
                 }
             }
         }

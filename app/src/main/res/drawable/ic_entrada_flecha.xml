@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Puerta -->
+    <path
+        android:fillColor="#888888"
+        android:pathData="M6,3h8a1,1 0 0,1 1,1v16a1,1 0 0,1 -1,1h-8a1,1 0 0,1 -1,-1v-16a1,1 0 0,1 1,-1zm1,2v14h6v-14h-6z"/>
+    <!-- Flecha verde hacia adentro -->
+    <path
+        android:fillColor="#2ECC40"
+        android:pathData="M19,12l-3,-3v2h-4v2h4v2z"/>
+</vector> 

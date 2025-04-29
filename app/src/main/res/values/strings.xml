@@ -80,5 +80,6 @@
     <string name="item_add_work_Button_input_Cancel">CANCELAR</string>
     <string name="item_add_work_Button_input_save">GUARDAR</string>
 
+    <string name="item_delete_content_description">Eliminar trabajador</string>
 
 </resources>

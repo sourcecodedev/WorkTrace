@@ -92,7 +92,7 @@
             android:orientation="horizontal"
             android:weightSum="2"
             android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/btnEliminar"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -119,20 +119,6 @@
                 android:textSize="16sp"
                 app:cornerRadius="4dp" />
         </LinearLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnEliminar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/item_editworker_Button_input_delete"
-            android:textSize="16sp"
-            android:padding="12dp"
-            app:cornerRadius="4dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/red_error"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout> 

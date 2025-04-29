@@ -70,6 +70,24 @@ class LoginActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         } else {
+            // Validar contra trabajadores registrados
+            val sharedPreferences = getSharedPreferences("trabajadores_prefs", MODE_PRIVATE)
+            val trabajadoresJson = sharedPreferences.getString("trabajadores", null)
+            if (trabajadoresJson != null) {
+                val type = object : com.google.gson.reflect.TypeToken<List<Trabajador>>() {}.type
+                val trabajadores = com.google.gson.Gson().fromJson<List<Trabajador>>(trabajadoresJson, type)
+                val trabajador = trabajadores.find { it.nombre == usuario && it.id == password && it.rol == "usuario" }
+                if (trabajador != null) {
+                    // Login exitoso de trabajador
+                    val intent = Intent(this, MarcacionUsuarioActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    intent.putExtra("TRABAJADOR_ID", trabajador.id)
+                    intent.putExtra("TRABAJADOR_NOMBRE", trabajador.nombre)
+                    startActivity(intent)
+                    finish()
+                    return
+                }
+            }
             // Login fallido
             Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
         }

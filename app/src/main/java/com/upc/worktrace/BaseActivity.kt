@@ -13,7 +13,6 @@ import androidx.appcompat.widget.Toolbar
 abstract class BaseActivity : AppCompatActivity() {
     
     lateinit var toolbar: Toolbar
-    private lateinit var toolbarTitle: TextView
     private val TAG = "BaseActivity"
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,8 +42,8 @@ abstract class BaseActivity : AppCompatActivity() {
             toolbar = findViewById(R.id.toolbar_worktrace)
             setSupportActionBar(toolbar)
             
-            // Quitar el título predeterminado de la ActionBar
-            supportActionBar?.setDisplayShowTitleEnabled(false)
+            // Mostrar el título en la ActionBar
+            supportActionBar?.setDisplayShowTitleEnabled(true)
             
             // Configurar el botón para volver atrás si es necesario
             if (showBackButton) {
@@ -53,9 +52,8 @@ abstract class BaseActivity : AppCompatActivity() {
             }
             
             // Configurar el título personalizado si es necesario
-            toolbarTitle = findViewById(R.id.toolbar_title)
             if (title != null) {
-                toolbarTitle.text = title
+                supportActionBar?.title = title
             }
         } catch (e: Exception) {
             Log.e(TAG, "Error en setupToolbar: ${e.message}")

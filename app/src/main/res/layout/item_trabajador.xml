@@ -31,9 +31,21 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnEliminar"
             app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/item_work_content_description" />
+
+        <ImageButton
+            android:id="@+id/btnEliminar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_delete"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/item_delete_content_description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

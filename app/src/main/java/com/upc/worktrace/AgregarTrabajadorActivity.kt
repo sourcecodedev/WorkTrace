@@ -74,6 +74,9 @@ class AgregarTrabajadorActivity : BaseActivity() {
         val resultIntent = Intent()
         resultIntent.putExtra("TRABAJADOR_ID", id)
         resultIntent.putExtra("TRABAJADOR_NOMBRE", nombre)
+        resultIntent.putExtra("TRABAJADOR_USUARIO", nombre)
+        resultIntent.putExtra("TRABAJADOR_PASSWORD", id)
+        resultIntent.putExtra("TRABAJADOR_ROL", "usuario")
         resultIntent.putExtra("ID_EXISTENTE", false)
         
         // Mostrar diálogo de confirmación
