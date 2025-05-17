@@ -1,0 +1,38 @@
+
+Asignaciones de Capas del Sistema WorkTrace
+| Capa                                    | Asignado a |
+| --------------------------------------- | ---------- |
+| Main Administrador                      | Jimi       |
+| Administrador - Gestionar Trabajador    | Harol      |
+| Administrador - Agregar Trabajador      | Yhimy      |
+| Administrador - Asignar Horario         | Ever       |
+| Administrador - Detalle Trabajador      | Harol      |
+| Administrador - Editar Trabajador       | Jimi       |
+| Administrador - Historial de Asistencia | Yhimy      |
+| Administrador - Rastreo Asistencia      | Ever       |
+| Administrador - Reporte                 | Jimi       |
+| Trabajador - Usuario                    | Harol      |
+| Trabajador - Marcar Entrada             | Yhimy      |
+| Trabajador - Marcar Salida              | Ever       |
+| Trabajador - Horario Asignado           | Harol      |
+| Login                                   | Jimi       |
+| databases schema logical                | Yhimy      |
+| databases schema Documentacion          | Yhimy      |
+
+--- Nombres sugeridos para las Activity
+| Capa / Pantalla                         | Asignado a | Nombre sugerido de la `Activity`  |
+| --------------------------------------- | ---------- | --------------------------------- |
+| Main Administrador                      | Jimi       | `AdminMainActivity`               |
+| Administrador - Gestionar Trabajador    | Harol      | `AdminManageWorkersActivity`      |
+| Administrador - Agregar Trabajador      | Yhimy      | `AdminAddWorkerActivity`          |
+| Administrador - Asignar Horario         | Ever       | `AdminAssignScheduleActivity`     |
+| Administrador - Detalle Trabajador      | Harol      | `AdminWorkerDetailActivity`       |
+| Administrador - Editar Trabajador       | Jimi       | `AdminEditWorkerActivity`         |
+| Administrador - Historial de Asistencia | Yhimy      | `AdminAttendanceHistoryActivity`  |
+| Administrador - Rastreo Asistencia      | Ever       | `AdminAttendanceTrackingActivity` |
+| Administrador - Reporte                 | Jimi       | `AdminReportActivity`             |
+| Trabajador - Usuario                    | Harol      | `WorkerProfileActivity`           |
+| Trabajador - Marcar Entrada             | Yhimy      | `WorkerCheckInActivity`           |
+| Trabajador - Marcar Salida              | Ever       | `WorkerCheckOutActivity`          |
+| Trabajador - Horario Asignado           | Harol      | `WorkerAssignedScheduleActivity`  |
+| Login                                   | Jimi       | `LoginActivity`                   |
