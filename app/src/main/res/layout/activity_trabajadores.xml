@@ -25,7 +25,7 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/item_work_register_title"
+            android:text="@string/item_main_menu_TextView_Workers"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/black"
