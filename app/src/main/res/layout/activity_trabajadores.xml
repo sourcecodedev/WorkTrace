@@ -25,7 +25,7 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/item_main_menu_TextView_Workers"
+            android:text="@string/item_main_menu_TextView_Workers_MAYUSCULA"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -48,18 +48,7 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp">
 
-                <TextView
-                    android:id="@+id/tvNombreHeader"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/item_work_register_TextView_name"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="2" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
