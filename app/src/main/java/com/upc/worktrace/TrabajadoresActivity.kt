@@ -12,21 +12,28 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import android.widget.Spinner
+import android.widget.ArrayAdapter
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
+import androidx.activity.result.ActivityResult
 
 class TrabajadoresActivity : BaseActivity() {
     
     private lateinit var rvTrabajadores: RecyclerView
     private lateinit var btnAgregarTrabajador: MaterialButton
     private lateinit var btnAtras: MaterialButton
+    private lateinit var etNombre: EditText
+    private lateinit var spinnerCantidad: Spinner
     private lateinit var trabajadoresAdapter: TrabajadoresAdapter
     
-    // Lista mutable de trabajadores para poder agregar nuevos
-    private val trabajadores = arrayListOf<Trabajador>()
+
+    private val trabajadores = ArrayList<Trabajador>()
     
-    // Lanzador para la actividad de agregar trabajador
+
     private val agregarTrabajadorLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ) { result ->
+    ) { result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data = result.data
             if (data != null) {
@@ -34,20 +41,20 @@ class TrabajadoresActivity : BaseActivity() {
                 val nombre = data.getStringExtra("TRABAJADOR_NOMBRE") ?: ""
                 val idExistente = data.getBooleanExtra("ID_EXISTENTE", false)
                 
-                if (!id.isEmpty() && !nombre.isEmpty() && !idExistente) {
+                if (id.isNotEmpty() && nombre.isNotEmpty() && !idExistente) {
                     val nuevoTrabajador = Trabajador(id, nombre, "usuario")
                     
-                    // Agregar el nuevo trabajador a la lista
+
                     trabajadores.add(nuevoTrabajador)
                     trabajadoresAdapter.notifyItemInserted(trabajadores.size - 1)
                     
-                    // Guardar la lista actualizada
+
                     guardarTrabajadores()
                     
-                    // Desplazar la vista al nuevo elemento
+
                     rvTrabajadores.smoothScrollToPosition(trabajadores.size - 1)
                     
-                    // Mostrar mensaje de éxito
+
                     Snackbar.make(rvTrabajadores, "Trabajador agregado correctamente", Snackbar.LENGTH_SHORT).show()
                 }
             }
@@ -65,11 +72,19 @@ class TrabajadoresActivity : BaseActivity() {
         rvTrabajadores = findViewById(R.id.rvTrabajadores)
         btnAgregarTrabajador = findViewById(R.id.btnAgregarTrabajador)
         btnAtras = findViewById(R.id.btnAtras)
+        etNombre = findViewById(R.id.etNombre)
+        spinnerCantidad = findViewById(R.id.spinnerCantidad)
+
+
+        val items = listOf("1 - 10", "11 - 20", "21 - 30")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCantidad.adapter = adapter
         
-        // Cargar la lista de trabajadores
+
         cargarTrabajadores()
         
-        // Configurar RecyclerView
+
         trabajadoresAdapter = TrabajadoresAdapter(trabajadores) { trabajador ->
             // Acción al hacer clic en un trabajador
             val intent = Intent(this, DetallesTrabajadorActivity::class.java)
@@ -89,7 +104,6 @@ class TrabajadoresActivity : BaseActivity() {
         
         // Configurar el botón atrás
         btnAtras.setOnClickListener {
-            // Simplemente cerramos la actividad para volver a la anterior
             finish()
         }
     }
@@ -112,31 +126,6 @@ class TrabajadoresActivity : BaseActivity() {
             
             // Guardar estos datos iniciales
             guardarTrabajadores()
-        }
-    }
-    
-    private fun agregarNuevoTrabajador(id: String, nombre: String): Boolean {
-        // Verificar que no exista ya un trabajador con el mismo ID
-        val existeTrabajador = trabajadores.any { it.id == id }
-        
-        if (!existeTrabajador) {
-            // Crear y agregar el nuevo trabajador
-            val nuevoTrabajador = Trabajador(id, nombre, "usuario")
-            trabajadores.add(nuevoTrabajador)
-            
-            // Notificar al adaptador que se ha añadido un elemento
-            trabajadoresAdapter.notifyItemInserted(trabajadores.size - 1)
-            
-            // Desplazar la vista al nuevo elemento
-            rvTrabajadores.smoothScrollToPosition(trabajadores.size - 1)
-            
-            // Mostrar mensaje de éxito
-            Toast.makeText(this, "Trabajador agregado a la lista", Toast.LENGTH_SHORT).show()
-            return true
-        } else {
-            // Mostrar mensaje de error
-            Toast.makeText(this, "Ya existe un trabajador con el ID $id", Toast.LENGTH_LONG).show()
-            return false
         }
     }
     
@@ -185,19 +174,19 @@ class TrabajadoresActivity : BaseActivity() {
                 }
 
                 btnEliminar.setOnClickListener {
-                    androidx.appcompat.app.AlertDialog.Builder(itemView.context)
+                    AlertDialog.Builder(itemView.context)
                         .setTitle("Eliminar trabajador")
                         .setMessage("¿Estás seguro de que deseas eliminar a ${trabajador.nombre}?")
                         .setPositiveButton("Sí") { dialog, _ ->
                             val position = adapterPosition
                             if (position != RecyclerView.NO_POSITION) {
-                                (trabajadores as java.util.ArrayList).removeAt(position)
+                                (trabajadores as ArrayList).removeAt(position)
                                 notifyItemRemoved(position)
                                 guardarTrabajadores()
-                                com.google.android.material.snackbar.Snackbar.make(
+                                Snackbar.make(
                                     itemView,
                                     "Trabajador eliminado correctamente",
-                                    com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
+                                    Snackbar.LENGTH_SHORT
                                 ).show()
                             }
                             dialog.dismiss()
