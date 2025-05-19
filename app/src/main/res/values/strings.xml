@@ -11,6 +11,7 @@
     <string name="item_main_menu_title">Menú Principal (Administrador)</string>
     <string name="item_main_menu_ImageView_ico_Workers">Icono de trabajadores</string>
     <string name="item_main_menu_TextView_Workers">Gestionar Trabajadores</string>
+    <string name="item_main_menu_TextView_Workers_MAYUSCULA">GESTIONAR TRABAJADORES</string>
     <string name="item_main_menu_ImageView_ico_Calendar">Icono de calendario</string>
     <string name="item_main_menu_TextView_Calendar">Asignar Horarios</string>
     <string name="item_main_menu_ImageView_ico_clock">Icono de reloj</string>

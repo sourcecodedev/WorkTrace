@@ -66,14 +66,16 @@
                 app:layout_constraintBottom_toTopOf="@+id/llHorario"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 android:layout_marginEnd="16dp">
+
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_entrada_flecha" />
+                    android:layout_width="140dp"
+                    android:layout_height="110dp"
+                    android:src="@mipmap/ic_entrada_foreground" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Marcar\nEntrada"
+                    android:text="Entrada"
                     android:textAlignment="center"
                     android:textColor="#222"
                     android:textSize="18sp"
@@ -92,14 +94,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/llHistorial"
                 android:layout_marginStart="16dp">
+
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_salida_flecha" />
+                    android:layout_width="130dp"
+                    android:layout_height="120dp"
+                    android:src="@mipmap/ic_salida_foreground" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Marcar\nSalida"
+                    android:text="Salida"
                     android:textAlignment="center"
                     android:textColor="#222"
                     android:textSize="18sp"
@@ -120,13 +124,13 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="24dp">
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_calendar" />
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@mipmap/ic_horario_foreground" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ver\nHorario"
+                    android:text="Horario"
                     android:textAlignment="center"
                     android:textColor="#222"
                     android:textSize="18sp"
@@ -147,13 +151,13 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp">
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_document" />
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@mipmap/ic_historial_foreground" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mi\nHistorial"
+                    android:text="Historial"
                     android:textAlignment="center"
                     android:textColor="#222"
                     android:textSize="18sp"
@@ -163,15 +167,15 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/btnCerrarSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="0dp"
         android:text="Cerrar sesión"
         android:textAllCaps="false"
         android:textSize="14sp"
-        app:backgroundTint="@android:color/holo_red_dark"
+        app:backgroundTint="@color/purple_700"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
