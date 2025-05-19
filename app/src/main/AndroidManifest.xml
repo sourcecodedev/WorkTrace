@@ -51,7 +51,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".AgregarTrabajadorActivity"
+            android:name=".AdminAddWorkerActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 

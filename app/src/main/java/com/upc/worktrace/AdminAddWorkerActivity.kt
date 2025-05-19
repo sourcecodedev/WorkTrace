@@ -13,7 +13,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class AgregarTrabajadorActivity : BaseActivity() {
+class AdminAddWorkerActivity : BaseActivity() {
     
     private lateinit var etId: TextInputLayout
     private lateinit var etNombre: TextInputLayout
@@ -22,7 +22,7 @@ class AgregarTrabajadorActivity : BaseActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_agregar_trabajador)
+        setContentView(R.layout.activity_admin_add_worker)
         
         // Configurar la barra superior
         setupToolbar(true, "Agregar Trabajador")

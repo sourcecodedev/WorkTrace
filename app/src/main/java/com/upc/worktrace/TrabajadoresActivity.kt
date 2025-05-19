@@ -98,7 +98,7 @@ class TrabajadoresActivity : BaseActivity() {
         
         // Configurar el botón de agregar trabajador
         btnAgregarTrabajador.setOnClickListener {
-            val intent = Intent(this, AgregarTrabajadorActivity::class.java)
+            val intent = Intent(this, AdminAddWorkerActivity::class.java)
             agregarTrabajadorLauncher.launch(intent)
         }
         
