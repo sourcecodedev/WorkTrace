@@ -7,7 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.button.MaterialButton
 
-class DetallesTrabajadorActivity : BaseActivity() {
+class AdminWorkerDetailActivity : BaseActivity() {
     
     private lateinit var tvId: TextView
     private lateinit var tvNombre: TextView
@@ -17,7 +17,7 @@ class DetallesTrabajadorActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         try {
             super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_detalles_trabajador)
+            setContentView(R.layout.activity_admin_worker_detail)
             
             // Obtener datos del intent
             val id = intent.getStringExtra("TRABAJADOR_ID") ?: ""

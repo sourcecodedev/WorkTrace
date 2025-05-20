@@ -31,7 +31,7 @@ Asignaciones de Capas del Sistema WorkTrace
 | Administrador - Historial de Asistencia | Yhimy      | `AdminAttendanceHistoryActivity`  |
 | Administrador - Rastreo Asistencia      | Ever       | `AdminAttendanceTrackingActivity` |
 | Administrador - Reporte                 | Jimi       | `AdminReportActivity`             |
-| Trabajador - Usuario                    | Harol      | `WorkerProfileActivity`           |
+| Trabajador - Usuario                    | Harol      | `WorkerMainProfileActivity`           |
 | Trabajador - Marcar Entrada             | Yhimy      | `WorkerCheckInActivity`           |
 | Trabajador - Marcar Salida              | Ever       | `WorkerCheckOutActivity`          |
 | Trabajador - Horario Asignado           | Harol      | `WorkerAssignedScheduleActivity`  |

@@ -5,7 +5,7 @@
     <string name="item_login_logo_content_description">Logo de WorkTrace</string>
     <string name="item_login_input_user">Usuario</string>
     <string name="item_login_input_password">Contraseña</string>
-    <string name="item_login_btn_ingresar">Contraseña</string>
+    <string name="item_login_btn_ingresar">Continuar</string>
 
     <string name="item_main_content_description">Logo de WorkTrace</string>
     <string name="item_main_menu_title">Menú Principal (Administrador)</string>

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +17,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.activity.result.ActivityResult
 
-class TrabajadoresActivity : BaseActivity() {
+class AdminManageWorkersActivity : BaseActivity() {
     
     private lateinit var rvTrabajadores: RecyclerView
     private lateinit var btnAgregarTrabajador: MaterialButton
@@ -63,7 +62,7 @@ class TrabajadoresActivity : BaseActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_trabajadores)
+        setContentView(R.layout.activity_admin_manage_workers)
         
         // Configurar la barra superior
         setupToolbar(true, "Trabajadores")
@@ -87,7 +86,7 @@ class TrabajadoresActivity : BaseActivity() {
 
         trabajadoresAdapter = TrabajadoresAdapter(trabajadores) { trabajador ->
             // Acción al hacer clic en un trabajador
-            val intent = Intent(this, DetallesTrabajadorActivity::class.java)
+            val intent = Intent(this, AdminWorkerDetailActivity::class.java)
             intent.putExtra("TRABAJADOR_ID", trabajador.id)
             intent.putExtra("TRABAJADOR_NOMBRE", trabajador.nombre)
             startActivity(intent)

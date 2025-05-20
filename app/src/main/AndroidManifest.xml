@@ -36,12 +36,12 @@
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name=".TrabajadoresActivity"
+            android:name=".AdminManageWorkersActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".DetallesTrabajadorActivity"
+            android:name=".AdminWorkerDetailActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
@@ -71,12 +71,12 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".MarcacionUsuarioActivity"
+            android:name=".WorkerMainProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".MarcarEntradaActivity"
+            android:name=".WorkerCheckInActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
@@ -86,7 +86,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".VerHorarioActivity"
+            android:name=".WorkerAssignedScheduleActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 

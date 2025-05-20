@@ -69,7 +69,7 @@ class MainActivity : BaseActivity() {
     private fun setupClickListeners() {
         // Configurar listeners
         cvGestionarTrabajadores.setOnClickListener {
-            val intent = Intent(this, TrabajadoresActivity::class.java)
+            val intent = Intent(this, AdminManageWorkersActivity::class.java)
             startActivity(intent)
         }
         

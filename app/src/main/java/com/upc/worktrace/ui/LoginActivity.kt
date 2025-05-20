@@ -11,9 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 import com.upc.worktrace.MainActivity
-import com.upc.worktrace.MarcacionUsuarioActivity
+import com.upc.worktrace.WorkerMainProfileActivity
 import com.upc.worktrace.R
-import com.upc.worktrace.Trabajador
 
 class LoginActivity : AppCompatActivity() {
 
@@ -73,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
                     finish()
 
                 } else {
-                    val intent = Intent(this, MarcacionUsuarioActivity::class.java)
+                    val intent = Intent(this, WorkerMainProfileActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     intent.putExtra("TRABAJADOR_ID", response.user?.id)
                     intent.putExtra("TRABAJADOR_NOMBRE", response.user?.username)
@@ -146,7 +145,7 @@ class LoginActivity : AppCompatActivity() {
                 val trabajador = trabajadores.find { it.nombre == usuario && it.id == password && it.rol == "usuario" }
                 if (trabajador != null) {
                     // Login exitoso de trabajador
-                    val intent = Intent(this, MarcacionUsuarioActivity::class.java)
+                    val intent = Intent(this, WorkerMainProfileActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     intent.putExtra("TRABAJADOR_ID", trabajador.id)
                     intent.putExtra("TRABAJADOR_NOMBRE", trabajador.nombre)
