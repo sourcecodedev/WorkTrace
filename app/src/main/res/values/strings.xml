@@ -17,7 +17,7 @@
     <string name="item_main_menu_ImageView_ico_clock">Icono de reloj</string>
     <string name="item_main_menu_TextView_clock">Ver Asistencia</string>
     <string name="item_main_menu_ImageView_ico_export">Icono de exportar</string>
-    <string name="item_main_menu_TextView_export">Exportar Reporte</string>
+    <string name="item_main_menu_TextView_export">Reportes</string>
 
     <string name="item_work_register_title">TRABAJADORES REGISTRADOS</string>
     <string name="item_work_register_TextView_name">Nombre</string>
@@ -82,5 +82,7 @@
     <string name="item_add_work_Button_input_save">GUARDAR</string>
 
     <string name="item_delete_content_description">Eliminar trabajador</string>
+    <string name="close_session">CERRAR SESSION</string>
+    <string name="gestion_de_reportes">Gestion de Reportes</string>
 
 </resources>

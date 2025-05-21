@@ -8,9 +8,10 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.google.android.material.card.MaterialCardView
 import androidx.appcompat.widget.Toolbar
+import com.upc.worktrace.ui.AdminReportActivity
 import com.upc.worktrace.ui.LoginActivity
 
-class MainActivity : BaseActivity() {
+class AdminMainActivity : BaseActivity() {
     
     private lateinit var cvGestionarTrabajadores: MaterialCardView
     private lateinit var cvAsignarHorarios: MaterialCardView
@@ -22,7 +23,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         try {
-            setContentView(R.layout.activity_main)
+            setContentView(R.layout.activity_admin_main)
             val toolbar = findViewById<Toolbar>(R.id.toolbar_worktrace)
             setSupportActionBar(toolbar)
             setupToolbar(false)
@@ -84,7 +85,7 @@ class MainActivity : BaseActivity() {
         }
         
         cvExportarReporte.setOnClickListener {
-            val intent = Intent(this, ExportarReporteActivity::class.java)
+            val intent = Intent(this, AdminReportActivity::class.java)
             startActivity(intent)
         }
     }

@@ -10,10 +10,9 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
-import com.upc.worktrace.MainActivity
+import com.upc.worktrace.AdminMainActivity
 import com.upc.worktrace.MarcacionUsuarioActivity
 import com.upc.worktrace.R
-import com.upc.worktrace.Trabajador
 
 class LoginActivity : AppCompatActivity() {
 
@@ -67,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Login exitoso!", Toast.LENGTH_SHORT).show()
 
                 if (response.user?.role == "ADMIN") {
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, AdminMainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                     finish()

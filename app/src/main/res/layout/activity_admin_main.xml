@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".AdminMainActivity"
     android:fitsSystemWindows="true">
 
     <include
@@ -199,7 +199,7 @@
                     android:id="@+id/ivExport"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:src="@drawable/ic_export"
+                    android:src="@drawable/ic_chart"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -223,14 +223,14 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCerrarSesion"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cerrar sesión"
+            android:layout_height="50dp"
+            android:text="@string/close_session"
             android:textAllCaps="false"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="4dp"
             app:cornerRadius="8dp"
-            app:backgroundTint="@android:color/holo_red_dark"
+            app:backgroundTint="@color/primary_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
