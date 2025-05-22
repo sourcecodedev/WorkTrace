@@ -3,13 +3,12 @@ package com.upc.worktrace
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
 import com.google.android.material.card.MaterialCardView
 import androidx.appcompat.widget.Toolbar
 import com.upc.worktrace.ui.AdminReportActivity
 import com.upc.worktrace.ui.LoginActivity
+import com.upc.worktrace.LoginActivity
 
 class AdminMainActivity : BaseActivity() {
     
@@ -70,7 +69,7 @@ class AdminMainActivity : BaseActivity() {
     private fun setupClickListeners() {
         // Configurar listeners
         cvGestionarTrabajadores.setOnClickListener {
-            val intent = Intent(this, TrabajadoresActivity::class.java)
+            val intent = Intent(this, AdminManageWorkersActivity::class.java)
             startActivity(intent)
         }
         
@@ -87,23 +86,6 @@ class AdminMainActivity : BaseActivity() {
         cvExportarReporte.setOnClickListener {
             val intent = Intent(this, AdminReportActivity::class.java)
             startActivity(intent)
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_logout, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_logout -> {
-                val intent = Intent(this, LoginActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
         }
     }
 } 

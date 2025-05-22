@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.upc.worktrace.data.model.LoginResponse
+import com.upc.worktrace.data.model.response.LoginResponse
 import com.upc.worktrace.data.repository.LoginRepository
 import kotlinx.coroutines.launch
 
 class LoginViewModel: ViewModel() {
 
-    private val repository = LoginRepository()
+    private val repository = LoginRepository("General")
 
     private val _loginResult = MutableLiveData<LoginResponse>()
     val loginResult: LiveData<LoginResponse> = _loginResult

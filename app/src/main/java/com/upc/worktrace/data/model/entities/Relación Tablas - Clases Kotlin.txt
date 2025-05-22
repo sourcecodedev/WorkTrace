@@ -1,0 +1,17 @@
+// Clases de datos para tablas en WorkTrace
+
+// Tabla de relación entre tablas de BD y clases Kotlin
+/*
+| Tabla BD                  | Clase Kotlin         |
+|--------------------------|----------------------|
+| usuario                  | Usuario              |
+| tipo_usuario             | TipoUsuario          |
+| trabajador               | Trabajador           |
+| tipo_contrato            | TipoContrato         |
+| distrito_trabajo         | DistritoTrabajo      |
+| dia_semana               | DiaSemana            |
+| horario_asignacion       | HorarioAsignacion    |
+| asistencia               | Asistencia           |
+| rastreo_ubicacion        | UbicacionRastreo     |
+| tipo_reporte             | TipoReporte          |
+| reporte_generado         | ReporteGenerado      |

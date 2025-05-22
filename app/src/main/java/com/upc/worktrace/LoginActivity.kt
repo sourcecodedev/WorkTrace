@@ -1,4 +1,4 @@
-package com.upc.worktrace.ui
+package com.upc.worktrace
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -13,6 +13,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.upc.worktrace.AdminMainActivity
 import com.upc.worktrace.MarcacionUsuarioActivity
 import com.upc.worktrace.R
+import com.upc.worktrace.ui.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
 
@@ -72,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
                     finish()
 
                 } else {
-                    val intent = Intent(this, MarcacionUsuarioActivity::class.java)
+                    val intent = Intent(this, WorkerMainProfileActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     intent.putExtra("TRABAJADOR_ID", response.user?.id)
                     intent.putExtra("TRABAJADOR_NOMBRE", response.user?.username)

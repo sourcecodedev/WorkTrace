@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,8 +16,9 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.activity.result.ActivityResult
+import com.upc.worktrace.data.model.entities.Trabajador
 
-class TrabajadoresActivity : BaseActivity() {
+class AdminManageWorkersActivity : BaseActivity() {
     
     private lateinit var rvTrabajadores: RecyclerView
     private lateinit var btnAgregarTrabajador: MaterialButton
@@ -42,8 +42,19 @@ class TrabajadoresActivity : BaseActivity() {
                 val idExistente = data.getBooleanExtra("ID_EXISTENTE", false)
                 
                 if (id.isNotEmpty() && nombre.isNotEmpty() && !idExistente) {
-                    val nuevoTrabajador = Trabajador(id, nombre, "usuario")
-                    
+                    val nuevoTrabajador = Trabajador(
+                        idTrabajador = 1,
+                        idUsuario = 2,
+                        nombres = "Juan Pérez",
+                        puesto = "Analista de Sistemas",
+                        jefeInmediato = "Carlos Gómez",
+                        idTipoContrato = 3,
+                        direccion = "Av. Siempre Viva 123",
+                        telefono = "987654321",
+                        idDistritoTrabajo = 5
+                    )
+
+
 
                     trabajadores.add(nuevoTrabajador)
                     trabajadoresAdapter.notifyItemInserted(trabajadores.size - 1)
@@ -63,7 +74,7 @@ class TrabajadoresActivity : BaseActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_trabajadores)
+        setContentView(R.layout.activity_admin_manage_workers)
         
         // Configurar la barra superior
         setupToolbar(true, "Trabajadores")
@@ -87,9 +98,16 @@ class TrabajadoresActivity : BaseActivity() {
 
         trabajadoresAdapter = TrabajadoresAdapter(trabajadores) { trabajador ->
             // Acción al hacer clic en un trabajador
-            val intent = Intent(this, DetallesTrabajadorActivity::class.java)
-            intent.putExtra("TRABAJADOR_ID", trabajador.id)
-            intent.putExtra("TRABAJADOR_NOMBRE", trabajador.nombre)
+            val intent = Intent(this, AdminWorkerDetailActivity::class.java)
+            intent.putExtra("TRABAJADOR_ID", trabajador.idTrabajador.toString())
+            intent.putExtra("TRABAJADOR_NOMBRE", trabajador.nombres)
+            intent.putExtra("TRABAJADOR_ROL", trabajador.rol)
+            intent.putExtra("TRABAJADOR_PUESTO", trabajador.puesto)
+            intent.putExtra("TRABAJADOR_JEFE", trabajador.jefeInmediato)
+            intent.putExtra("TRABAJADOR_CONTRATO", trabajador.idTipoContrato.toString())
+            intent.putExtra("TRABAJADOR_DIRECCION", trabajador.direccion)
+            intent.putExtra("TRABAJADOR_TELEFONO", trabajador.telefono)
+            intent.putExtra("TRABAJADOR_DISTRITO", trabajador.idDistritoTrabajo.toString())
             startActivity(intent)
         }
         
@@ -121,9 +139,37 @@ class TrabajadoresActivity : BaseActivity() {
             trabajadores.addAll(trabajadoresCargados)
         } else {
             // Si no hay datos guardados, agregar algunos trabajadores de ejemplo
-            trabajadores.add(Trabajador("1234", "Yhimy Feria"))
-            trabajadores.add(Trabajador("5678", "Ana Torres"))
-            
+            val trabajadores = mutableListOf<Trabajador>()
+
+            trabajadores.add(
+                Trabajador(
+                    idTrabajador = 1234,
+                    idUsuario = 1,
+                    nombres  = "Yhimy Feria",
+                    puesto = "Ingeniero de Software",
+                    jefeInmediato = "Carlos Gómez",
+                    idTipoContrato = 2,
+                    direccion = "Av. La Marina 123",
+                    telefono = "987654321",
+                    idDistritoTrabajo = 1
+                )
+            )
+
+            trabajadores.add(
+                Trabajador(
+                    idTrabajador = 5678,
+                    idUsuario = 2,
+                    nombres = "Ana Torres",
+                    puesto = "Diseñadora UX",
+                    jefeInmediato = "María López",
+                    idTipoContrato = 3,
+                    direccion = "Calle Los Pinos 456",
+                    telefono = "912345678",
+                    idDistritoTrabajo = 3
+                )
+            )
+
+
             // Guardar estos datos iniciales
             guardarTrabajadores()
         }
@@ -162,7 +208,7 @@ class TrabajadoresActivity : BaseActivity() {
             private val btnEliminar: android.widget.ImageButton = itemView.findViewById(R.id.btnEliminar)
             
             fun bind(trabajador: Trabajador) {
-                tvNombre.text = trabajador.nombre
+                tvNombre.text = trabajador.nombres
                 
                 btnDetalle.setOnClickListener {
                     onItemClick(trabajador)
@@ -176,7 +222,7 @@ class TrabajadoresActivity : BaseActivity() {
                 btnEliminar.setOnClickListener {
                     AlertDialog.Builder(itemView.context)
                         .setTitle("Eliminar trabajador")
-                        .setMessage("¿Estás seguro de que deseas eliminar a ${trabajador.nombre}?")
+                        .setMessage("¿Estás seguro de que deseas eliminar a ${trabajador.nombres}?")
                         .setPositiveButton("Sí") { dialog, _ ->
                             val position = adapterPosition
                             if (position != RecyclerView.NO_POSITION) {

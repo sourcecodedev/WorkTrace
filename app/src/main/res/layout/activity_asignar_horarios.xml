@@ -73,7 +73,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/item_assign_schedule_CheckBox_input_Monday"
-                        android:checked="true"
                         android:textSize="16sp" />
 
                     <CheckBox
@@ -92,6 +91,38 @@
                         android:layout_marginStart="16dp" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <CheckBox
+                        android:id="@+id/cbJueves"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/item_assign_schedule_CheckBox_input_Thursday"
+                        android:checked="false"
+                        android:textSize="16sp" />
+
+                    <CheckBox
+                        android:id="@+id/cbViernes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/item_assign_schedule_CheckBox_input_Friday"
+                        android:checked="false"
+                        android:textSize="16sp"
+                        android:layout_marginStart="16dp" />
+                    <CheckBox
+                        android:id="@+id/cbSabado"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/item_assign_schedule_CheckBox_input_Saturday"
+                        android:checked="false"
+                        android:textSize="16sp"
+                        android:layout_marginStart="16dp" />
+                </LinearLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -99,6 +130,12 @@
                     android:textSize="18sp"
                     android:textColor="@color/black"
                     android:layout_marginTop="24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Entrada"
+                    android:layout_marginTop="8dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnHoraEntrada"
@@ -112,6 +149,12 @@
                     android:textColor="@color/black"
                     android:layout_marginTop="8dp"
                     android:padding="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salida"
+                    android:layout_marginTop="8dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnHoraSalida"

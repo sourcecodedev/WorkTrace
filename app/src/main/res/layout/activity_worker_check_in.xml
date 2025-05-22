@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA">
+    android:background="#FFFFFF">
 
+
+    <include
+        android:id="@+id/includeToolbar"
+        layout="@layout/toolbar_worktrace"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ICONO flotante centrado sobre el header -->
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:src="@drawable/ic_logo"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="48dp"
+        app:layout_constraintTop_toBottomOf="@id/includeToolbar"
+        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -20,21 +30,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="WorkTrace"
-        android:textSize="36sp"
+        android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="#222"
+        android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@id/ivLogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp" />
 
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardMarcacion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         app:cardCornerRadius="16dp"
-        app:cardElevation="2dp"
+        app:cardElevation="4dp"
         app:layout_constraintTop_toBottomOf="@id/tvTitulo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,15 +64,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Marcar Entrada"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:textSize="22sp"
                 android:textColor="#222" />
 
             <TextView
                 android:id="@+id/tvFecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="15 abril 2024"
+                android:text="15 abril 2025"
                 android:textSize="16sp"
                 android:textColor="#444"
                 android:layout_marginTop="8dp" />
@@ -71,43 +82,62 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="08:32"
+                android:textSize="32sp"
                 android:textStyle="bold"
-                android:textSize="36sp"
-                android:textColor="#222"
+                android:textColor="#000"
                 android:layout_marginTop="8dp" />
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical">
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/ic_location_on_black_24dp"
-                    android:tint="#444" />
+                    app:tint="#2ECC40"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ubicación"
+                    android:text="15108 SMP"
                     android:textSize="16sp"
                     android:textColor="#444"
                     android:layout_marginStart="4dp" />
             </LinearLayout>
 
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnMarcarEntrada"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Marcar Entrada"
-                android:textAllCaps="false"
-                android:textSize="18sp"
-                android:layout_marginTop="16dp"
+                android:text="MARCAR"
+                android:textAllCaps="true"
+                android:textSize="16sp"
                 app:cornerRadius="8dp"
-                app:backgroundTint="#2ECC40"
-                android:textColor="#fff" />
+                app:backgroundTint="#002AFF"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="16dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout> 
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAtras"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="ATRAS"
+        android:textAllCaps="true"
+        android:textSize="14sp"
+        app:cornerRadius="8dp"
+        app:backgroundTint="#002AFF"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

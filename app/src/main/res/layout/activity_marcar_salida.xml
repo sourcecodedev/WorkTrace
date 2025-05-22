@@ -5,15 +5,22 @@
     android:layout_height="match_parent"
     android:background="#FAFAFA">
 
+    <include
+        layout="@layout/toolbar_worktrace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="72dp"
         android:layout_height="72dp"
+        android:layout_marginTop="128dp"
         android:src="@drawable/ic_logo"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTitulo"
@@ -108,6 +115,24 @@
                 app:backgroundTint="#2979FF"
                 android:textColor="#fff" />
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAtras"
+        android:layout_width="190dp"
+        android:layout_height="59dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="36dp"
+        android:padding="14dp"
+        android:text="@string/item_assistance_history_TextView_return"
+        android:textSize="16sp"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout> 

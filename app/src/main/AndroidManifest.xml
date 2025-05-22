@@ -8,13 +8,13 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkTrace.NoActionBar"
+        android:hardwareAccelerated="true"
+        android:largeHeap="true"
         tools:targetApi="31">
         <activity
             android:name=".ui.AdminReportActivity"
@@ -26,7 +26,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -37,53 +36,67 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TrabajadoresActivity"
+            android:name=".AdminManageWorkersActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
-            android:name=".DetallesTrabajadorActivity"
+            android:name=".AdminWorkerDetailActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".EditarTrabajadorActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".AdminAddWorkerActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".AsignarHorariosActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".HistorialAsistenciaActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".ExportarReporteActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
-            android:name=".MarcacionUsuarioActivity"
+            android:name=".WorkerMainProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
-            android:name=".MarcarEntradaActivity"
+            android:name=".WorkerCheckInActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".MarcarSalidaActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
-            android:name=".VerHorarioActivity"
+            android:name=".WorkerAssignedScheduleActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".HistorialAsistenciaUsuarioActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
     </application>
+
+
 
 </manifest>

@@ -12,6 +12,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.upc.worktrace.data.model.entities.Trabajador
 
 class AdminAddWorkerActivity : BaseActivity() {
     
@@ -115,7 +116,7 @@ class AdminAddWorkerActivity : BaseActivity() {
             val trabajadores = Gson().fromJson<List<Trabajador>>(trabajadoresJson, type)
             
             // Verificar si existe algún trabajador con el mismo ID
-            return trabajadores.any { it.id == id }
+            return trabajadores.any { it.idTrabajador == id.toInt() }
         }
         
         return false

@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MarcarEntradaActivity : AppCompatActivity() {
+class WorkerCheckInActivity : AppCompatActivity() {
     private lateinit var tvFecha: TextView
     private lateinit var tvHora: TextView
     private val handler = Handler(Looper.getMainLooper())
@@ -31,7 +31,7 @@ class MarcarEntradaActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_marcar_entrada)
+        setContentView(R.layout.activity_worker_check_in)
 
         tvFecha = findViewById(R.id.tvFecha)
         tvHora = findViewById(R.id.tvHora)

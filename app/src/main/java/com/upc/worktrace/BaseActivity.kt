@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.upc.worktrace.utils.WorkTraceUtils
 
 /**
  * Actividad base para todas las actividades de la aplicación.
