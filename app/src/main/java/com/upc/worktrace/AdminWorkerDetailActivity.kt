@@ -27,15 +27,15 @@ class AdminWorkerDetailActivity : BaseActivity() {
             setContentView(R.layout.activity_admin_worker_detail)
             
             // Obtener datos del intent
-            val id = intent.getStringExtra("TRABAJADOR_ID") ?: ""
-            val nombre = intent.getStringExtra("TRABAJADOR_NOMBRE") ?: ""
-            val rol = intent.getStringExtra("TRABAJADOR_ROL") ?: ""
-            val puesto = intent.getStringExtra("TRABAJADOR_PUESTO") ?: ""
-            val jefeInmediato = intent.getStringExtra("TRABAJADOR_JEFE") ?: ""
-            val tipoContrato = intent.getStringExtra("TRABAJADOR_CONTRATO") ?: ""
-            val direccion = intent.getStringExtra("TRABAJADOR_DIRECCION") ?: ""
-            val telefono = intent.getStringExtra("TRABAJADOR_TELEFONO") ?: ""
-            val distrito = intent.getStringExtra("TRABAJADOR_DISTRITO") ?: ""
+            val id = intent.getStringExtra("TRABAJADOR_ID") ?: "-"
+            val nombre = intent.getStringExtra("TRABAJADOR_NOMBRE") ?: "-"
+            val rol = intent.getStringExtra("TRABAJADOR_ROL") ?: "-"
+            val puesto = intent.getStringExtra("TRABAJADOR_PUESTO") ?: "-"
+            val jefeInmediato = intent.getStringExtra("TRABAJADOR_JEFE") ?: "-"
+            val tipoContrato = intent.getStringExtra("TRABAJADOR_CONTRATO") ?: "-"
+            val direccion = intent.getStringExtra("TRABAJADOR_DIRECCION") ?: "-"
+            val telefono = intent.getStringExtra("TRABAJADOR_TELEFONO") ?: "-"
+            val distrito = intent.getStringExtra("TRABAJADOR_DISTRITO") ?: "-"
             
             // Configurar la barra superior
             setupToolbar(true, nombre)
