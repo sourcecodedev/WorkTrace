@@ -99,8 +99,15 @@ class AdminManageWorkersActivity : BaseActivity() {
         trabajadoresAdapter = TrabajadoresAdapter(trabajadores) { trabajador ->
             // Acción al hacer clic en un trabajador
             val intent = Intent(this, AdminWorkerDetailActivity::class.java)
-            intent.putExtra("TRABAJADOR_ID", trabajador.idTrabajador)
+            intent.putExtra("TRABAJADOR_ID", trabajador.idTrabajador.toString())
             intent.putExtra("TRABAJADOR_NOMBRE", trabajador.nombres)
+            intent.putExtra("TRABAJADOR_ROL", trabajador.rol)
+            intent.putExtra("TRABAJADOR_PUESTO", trabajador.puesto)
+            intent.putExtra("TRABAJADOR_JEFE", trabajador.jefeInmediato)
+            intent.putExtra("TRABAJADOR_CONTRATO", trabajador.idTipoContrato.toString())
+            intent.putExtra("TRABAJADOR_DIRECCION", trabajador.direccion)
+            intent.putExtra("TRABAJADOR_TELEFONO", trabajador.telefono)
+            intent.putExtra("TRABAJADOR_DISTRITO", trabajador.idDistritoTrabajo.toString())
             startActivity(intent)
         }
         

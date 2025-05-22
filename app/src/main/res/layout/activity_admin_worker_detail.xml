@@ -224,7 +224,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/btnEditar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -234,7 +234,7 @@
             android:textAllCaps="false"
             android:layout_marginEnd="8dp"/>
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/btnAtras"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
