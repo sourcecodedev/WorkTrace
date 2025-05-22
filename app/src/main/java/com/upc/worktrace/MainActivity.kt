@@ -8,7 +8,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.google.android.material.card.MaterialCardView
 import androidx.appcompat.widget.Toolbar
-import com.upc.worktrace.ui.LoginActivity
+import com.upc.worktrace.LoginActivity
 
 class MainActivity : BaseActivity() {
     

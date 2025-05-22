@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel: ViewModel() {
 
-    private val repository = LoginRepository()
+    private val repository = LoginRepository("General")
 
     private val _loginResult = MutableLiveData<LoginResponse>()
     val loginResult: LiveData<LoginResponse> = _loginResult

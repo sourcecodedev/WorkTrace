@@ -6,7 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.content.Intent
 import androidx.appcompat.widget.Toolbar
-import com.upc.worktrace.ui.LoginActivity
+import com.upc.worktrace.LoginActivity
 
 class WorkerMainProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.upc.worktrace.ui
+package com.upc.worktrace
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,18 +10,16 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
-import com.upc.worktrace.MainActivity
-import com.upc.worktrace.WorkerMainProfileActivity
-import com.upc.worktrace.R
+import com.upc.worktrace.ui.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var viewModel: LoginViewModel
-    
+
     private lateinit var usernameInput: TextInputLayout
     private lateinit var passwordInput: TextInputLayout
     private lateinit var loginButton: MaterialButton
-    
+
     @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,9 +84,9 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
-        
 
-        
+
+
         // Inicializar vistas
         /*etUsuario = findViewById(R.id.etUsuario)
         etPassword = findViewById(R.id.etPassword)
@@ -105,7 +103,7 @@ class LoginActivity : AppCompatActivity() {
     private fun login() {
         val usuario = etUsuario.editText?.text.toString().trim()
         val password = etPassword.editText?.text.toString().trim()
-        
+
         // Validación básica
         if (usuario.isEmpty()) {
             etUsuario.error = "El usuario no puede estar vacío"
@@ -113,14 +111,14 @@ class LoginActivity : AppCompatActivity() {
         } else {
             etUsuario.error = null
         }
-        
+
         if (password.isEmpty()) {
             etPassword.error = "La contraseña no puede estar vacía"
             return
         } else {
             etPassword.error = null
         }
-        
+
         // Aquí iría la validación real contra una API o base de datos
         // Por ahora, simplemente verificamos si es "admin"/"admin" para simular
         if (usuario == "admin" && password == "admin") {

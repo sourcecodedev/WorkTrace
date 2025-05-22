@@ -1,17 +1,22 @@
 package com.upc.worktrace.data.remote
 
+import com.upc.worktrace.data.model.ApiOwner
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    private const val BASE_URL = "https://mock-c4159884c5b24c80a095d43fed1b1c16.mock.insomnia.rest/"
+    private val clients = mutableMapOf<String, ApiService>()
 
-    val apiService: ApiService by lazy {
-        Retrofit
-            .Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(ApiService::class.java)
+    fun getClient(owner: String): ApiService {
+        return clients.getOrPut(owner.lowercase()) {
+            val baseUrl = ApiOwner.fromName(owner)?.baseUrl
+                ?: throw IllegalArgumentException("Nombre de desarrollador no válido: $owner")
+
+            Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(ApiService::class.java)
+        }
     }
 }
