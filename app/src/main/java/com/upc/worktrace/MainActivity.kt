@@ -3,8 +3,6 @@ package com.upc.worktrace
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
 import com.google.android.material.card.MaterialCardView
 import androidx.appcompat.widget.Toolbar
@@ -86,23 +84,6 @@ class MainActivity : BaseActivity() {
         cvExportarReporte.setOnClickListener {
             val intent = Intent(this, ExportarReporteActivity::class.java)
             startActivity(intent)
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_logout, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_logout -> {
-                val intent = Intent(this, LoginActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
         }
     }
 } 
