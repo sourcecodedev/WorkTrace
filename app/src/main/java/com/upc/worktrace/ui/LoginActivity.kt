@@ -1,4 +1,4 @@
-package com.upc.worktrace
+package com.upc.worktrace.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -11,9 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 import com.upc.worktrace.AdminMainActivity
-import com.upc.worktrace.MarcacionUsuarioActivity
 import com.upc.worktrace.R
-import com.upc.worktrace.ui.LoginViewModel
+import com.upc.worktrace.WorkerMainProfileActivity
 
 class LoginActivity : AppCompatActivity() {
 
