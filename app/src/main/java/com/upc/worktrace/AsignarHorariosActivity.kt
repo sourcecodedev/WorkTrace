@@ -138,7 +138,7 @@ class AsignarHorariosActivity : BaseActivity() {
 
         // Enviar cada día a la API
         for (dia in diasSeleccionados) {
-            enviarHorarioAlServidor(idHorarioAsignacion, dia, horaEntrada, horaSalida)
+            //enviarHorarioAlServidor(idHorarioAsignacion, dia, horaEntrada, horaSalida)
         }
 
         Toast.makeText(this, "Horario asignado correctamente", Toast.LENGTH_SHORT).show()
