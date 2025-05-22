@@ -1,4 +1,4 @@
-package com.upc.worktrace.ui
+package com.upc.worktrace.viewmodel
 
 import com.upc.worktrace.data.repository.HorarioDetalleRepository
 

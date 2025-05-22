@@ -1,20 +1,26 @@
 package com.upc.worktrace.data.remote
 
-import com.upc.worktrace.data.model.entities.HorarioAsignacion
 import com.upc.worktrace.data.model.request.HorarioAsignacionRequest
 import com.upc.worktrace.data.model.request.HorarioDetalleRequest
 import com.upc.worktrace.data.model.request.LoginRequest
 import com.upc.worktrace.data.model.request.MarcarSalidaRequest
 import com.upc.worktrace.data.model.request.RastreoAsistenciaRequest
 import com.upc.worktrace.data.model.request.WorkerRequest
+import com.upc.worktrace.data.model.response.DistritoResponse
 import com.upc.worktrace.data.model.response.HorarioAsignacionResponse
 import com.upc.worktrace.data.model.response.HorarioDetalleResponse
 import com.upc.worktrace.data.model.response.LoginResponse
 import com.upc.worktrace.data.model.response.MarcarSalidaResponse
 import com.upc.worktrace.data.model.response.RastreoAsistenciaResponse
+import com.upc.worktrace.data.model.response.TipoContratoResponse
 import com.upc.worktrace.data.model.response.WorkerResponse
+import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface ApiService {
 
@@ -38,4 +44,28 @@ interface ApiService {
 
     @POST("/v1/rastreo-asistencia")
     suspend fun mostrarRastreo(@Body request: RastreoAsistenciaRequest): RastreoAsistenciaResponse
+
+    @POST("trabajadores")
+    suspend fun registrarTrabajador(@Body request: WorkerRequest): WorkerResponse
+
+    @GET("trabajadores")
+    suspend fun obtenerTodosTrabajadores(): WorkerResponse
+
+    @GET("trabajadores/{id}")
+    suspend fun obtenerTrabajadorPorId(@Path("id") trabajadorId: Int): WorkerResponse
+
+    @PUT("trabajadores/{id}")
+    suspend fun actualizarTrabajador(
+        @Path("id") trabajadorId: Int,
+        @Body request: WorkerRequest
+    ): WorkerResponse
+
+    @DELETE("trabajadores/{id}")
+    suspend fun eliminarTrabajador(@Path("id") trabajadorId: Int): WorkerResponse
+
+    @GET("api/tipotrabajo")
+    suspend fun listarTiposTrabajo(): TipoContratoResponse
+
+    @GET("api/distrito")
+    suspend fun listarDistritos(): Response<List<DistritoResponse>>
 }

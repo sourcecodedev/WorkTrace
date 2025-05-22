@@ -10,7 +10,7 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
-import com.upc.worktrace.ui.LoginViewModel
+import com.upc.worktrace.viewmodel.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
 

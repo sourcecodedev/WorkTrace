@@ -7,14 +7,13 @@ import com.upc.worktrace.data.remote.RetrofitClient
 class LoginRepository(owner: String) {
 
     private val api = RetrofitClient.getClient(owner)
+    
     suspend fun login(username: String, password: String): LoginResponse {
         val request = LoginRequest(username, password)
-        if (username == "admin" && password == "admin") {
-            return api.login(request)
+        return if (username == "admin" && password == "admin") {
+            api.login(request)
+        } else {
+            api.loginWorker(request)
         }
-
-        return api.loginWorker(request)
-
     }
-
 }

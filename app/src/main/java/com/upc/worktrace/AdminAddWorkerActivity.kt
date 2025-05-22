@@ -1,124 +1,221 @@
 package com.upc.worktrace
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import com.upc.worktrace.data.model.entities.Trabajador
+import com.upc.worktrace.viewmodel.WorkerViewModel
 
-class AdminAddWorkerActivity : BaseActivity() {
+class AdminAddWorkerActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: WorkerViewModel
     
+    // Vistas
     private lateinit var etId: TextInputLayout
-    private lateinit var etNombre: TextInputLayout
+    private lateinit var etNombres: TextInputLayout
+    private lateinit var etPuesto: TextInputLayout
+    private lateinit var etJefeInmediato: TextInputLayout
+    private lateinit var etDireccion: TextInputLayout
+    private lateinit var etTelefono: TextInputLayout
+    private lateinit var spinnerTipoContrato: TextInputLayout
+    private lateinit var spinnerDistritoTrabajo: TextInputLayout
     private lateinit var btnGuardar: MaterialButton
     private lateinit var btnCancelar: MaterialButton
+    private lateinit var progressBar: ProgressBar
+
+    // Lista de campos para validación
+    private val camposRequeridos = mutableListOf<Pair<TextInputLayout, TextInputEditText>>()
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_add_worker)
-        
-        // Configurar la barra superior
-        setupToolbar(true, "Agregar Trabajador")
-        
-        // Inicializar vistas
+
+        // Inicializar ViewModel
+        viewModel = ViewModelProvider(this)[WorkerViewModel::class.java]
+
+        initializeViews()
+        setupToolbar()
+        setupCamposRequeridos()
+        setupSpinners()
+        setupObservers()
+        setupListeners()
+    }
+
+    private fun initializeViews() {
         etId = findViewById(R.id.etId)
-        etNombre = findViewById(R.id.etNombre)
+        etNombres = findViewById(R.id.etNombres)
+        etPuesto = findViewById(R.id.etPuesto)
+        etJefeInmediato = findViewById(R.id.etJefeInmediato)
+        etDireccion = findViewById(R.id.etDireccion)
+        etTelefono = findViewById(R.id.etTelefono)
+        spinnerTipoContrato = findViewById(R.id.spinnerTipoContrato)
+        spinnerDistritoTrabajo = findViewById(R.id.spinnerDistritoTrabajo)
         btnGuardar = findViewById(R.id.btnGuardar)
         btnCancelar = findViewById(R.id.btnCancelar)
-        
-        // Configurar el botón de guardar
-        btnGuardar.setOnClickListener {
-            // Verificar campos antes de mostrar el diálogo
-            validarYGuardarTrabajador()
+        progressBar = findViewById(R.id.progressBar)
+    }
+
+    private fun setupToolbar() {
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        findViewById<View>(R.id.btnBack).setOnClickListener { onBackPressed() }
+        findViewById<android.widget.TextView>(R.id.toolbarTitle).text = "Agregar Trabajador"
+    }
+
+    private fun setupCamposRequeridos() {
+        camposRequeridos.addAll(listOf(
+            Pair(etId, etId.editText as TextInputEditText),
+            Pair(etNombres, etNombres.editText as TextInputEditText),
+            Pair(etPuesto, etPuesto.editText as TextInputEditText),
+            Pair(etJefeInmediato, etJefeInmediato.editText as TextInputEditText),
+            Pair(etDireccion, etDireccion.editText as TextInputEditText),
+            Pair(etTelefono, etTelefono.editText as TextInputEditText)
+        ))
+    }
+
+    private fun setupSpinners() {
+        // Configurar Spinner Tipo Contrato
+        val tiposContrato = listOf("Tiempo Completo", "Medio Tiempo", "Por Horas")
+        val adapterTipoContrato = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, tiposContrato)
+        (spinnerTipoContrato.editText as? AutoCompleteTextView)?.setAdapter(adapterTipoContrato)
+        (spinnerTipoContrato.editText as? AutoCompleteTextView)?.setText(tiposContrato[0], false)
+
+        // Configurar Spinner Distrito Trabajo
+        val distritos = listOf("San Isidro", "Miraflores", "San Borja", "Surco", "La Molina")
+        val adapterDistrito = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, distritos)
+        (spinnerDistritoTrabajo.editText as? AutoCompleteTextView)?.setAdapter(adapterDistrito)
+        (spinnerDistritoTrabajo.editText as? AutoCompleteTextView)?.setText(distritos[0], false)
+    }
+
+    private fun setupObservers() {
+        viewModel.cargando.observe(this) { estaCargando ->
+            progressBar.visibility = if (estaCargando) View.VISIBLE else View.GONE
+            btnGuardar.isEnabled = !estaCargando
+            btnCancelar.isEnabled = !estaCargando
         }
-        
-        // Configurar el botón de cancelar
+
+        viewModel.resultadoTrabajador.observe(this) { resultado ->
+            if (resultado.success) {
+                Toast.makeText(this, "Trabajador registrado exitosamente", Toast.LENGTH_SHORT).show()
+                finish()
+            } else {
+                Toast.makeText(this, resultado.message, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun setupListeners() {
+        btnGuardar.setOnClickListener {
+            if (validarCampos()) {
+                registrarTrabajador()
+            }
+        }
+
         btnCancelar.setOnClickListener {
-            // Simplemente cerramos la actividad para volver a la anterior
-            setResult(Activity.RESULT_CANCELED)
             finish()
         }
     }
-    
-    private fun validarYGuardarTrabajador() {
-        val id = etId.editText?.text.toString().trim()
-        val nombre = etNombre.editText?.text.toString().trim()
 
-        // Verificar que los campos no estén vacíos
-        if (id.isEmpty() || nombre.isEmpty()) {
-            Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
-            return
+    private fun validarCampos(): Boolean {
+        var isValid = true
+        
+        // Validar campos requeridos
+        camposRequeridos.forEach { (layout, editText) ->
+            if (editText.text.toString().trim().isEmpty()) {
+                layout.error = "Campo requerido"
+                isValid = false
+            } else {
+                layout.error = null
+            }
         }
 
-        // Verificar si el ID ya existe
-        val idExistente = verificarIdExistente(id)
-        
-        if (idExistente) {
-            Toast.makeText(this, "El ID ya está registrado", Toast.LENGTH_LONG).show()
-            return
+        // Validar spinners
+        if ((spinnerTipoContrato.editText as? AutoCompleteTextView)?.text.toString().isEmpty()) {
+            spinnerTipoContrato.error = "Seleccione un tipo de contrato"
+            isValid = false
+        } else {
+            spinnerTipoContrato.error = null
         }
-        
-        // Si todo está bien, mostrar diálogo de confirmación
-        mostrarDialogoConfirmacion(id, nombre)
-    }
-    
-    private fun mostrarDialogoConfirmacion(id: String, nombre: String) {
-        // Crear el intent con los datos del trabajador
-        val resultIntent = Intent()
-        resultIntent.putExtra("TRABAJADOR_ID", id)
-        resultIntent.putExtra("TRABAJADOR_NOMBRE", nombre)
-        resultIntent.putExtra("TRABAJADOR_USUARIO", nombre)
-        resultIntent.putExtra("TRABAJADOR_PASSWORD", id)
-        resultIntent.putExtra("TRABAJADOR_ROL", "usuario")
-        resultIntent.putExtra("ID_EXISTENTE", false)
-        
-        // Mostrar diálogo de confirmación
-        AlertDialog.Builder(this)
-            .setTitle("Confirmar registro")
-            .setMessage("¿Está seguro de agregar al trabajador $nombre?")
-            .setPositiveButton("Aceptar") { dialog, _ ->
-                dialog.dismiss()
-                // Mostrar mensaje de éxito
-                Toast.makeText(this, "Trabajador registrado correctamente", Toast.LENGTH_SHORT).show()
-                
-                // Enviar resultado y cerrar la actividad después de un breve momento
-                Handler(Looper.getMainLooper()).postDelayed({
-                    setResult(Activity.RESULT_OK, resultIntent)
-                    finish()
-                }, 1000)
-            }
-            .setNegativeButton("Cancelar") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .setCancelable(false)
-            .show()
-    }
-    
-    private fun guardarTrabajador() {
-        validarYGuardarTrabajador()
-    }
-    
-    private fun verificarIdExistente(id: String): Boolean {
-        // Obtener la lista de trabajadores desde SharedPreferences
-        val sharedPreferences = getSharedPreferences("trabajadores_prefs", Context.MODE_PRIVATE)
-        val trabajadoresJson = sharedPreferences.getString("trabajadores", null)
-        
-        if (trabajadoresJson != null) {
-            val type = object : TypeToken<List<Trabajador>>() {}.type
-            val trabajadores = Gson().fromJson<List<Trabajador>>(trabajadoresJson, type)
-            
-            // Verificar si existe algún trabajador con el mismo ID
-            return trabajadores.any { it.idTrabajador == id.toInt() }
+
+        if ((spinnerDistritoTrabajo.editText as? AutoCompleteTextView)?.text.toString().isEmpty()) {
+            spinnerDistritoTrabajo.error = "Seleccione un distrito"
+            isValid = false
+        } else {
+            spinnerDistritoTrabajo.error = null
         }
-        
-        return false
+
+        // Validaciones específicas
+        // Validar formato de teléfono (9 dígitos)
+        val telefono = etTelefono.editText?.text.toString()
+        if (telefono.isNotEmpty() && !telefono.matches(Regex("^[0-9]{9}$"))) {
+            etTelefono.error = "Ingrese un número válido de 9 dígitos"
+            isValid = false
+        }
+
+        // Validar que el ID sea numérico
+        val id = etId.editText?.text.toString()
+        if (id.isNotEmpty() && !id.matches(Regex("^[0-9]+$"))) {
+            etId.error = "Ingrese un ID válido (solo números)"
+            isValid = false
+        }
+
+        return isValid
+    }
+
+    private fun registrarTrabajador() {
+        try {
+            val id = etId.editText?.text.toString().toInt()
+            val nombres = etNombres.editText?.text.toString()
+            val puesto = etPuesto.editText?.text.toString()
+            val jefeInmediato = etJefeInmediato.editText?.text.toString()
+            val direccion = etDireccion.editText?.text.toString()
+            val telefono = etTelefono.editText?.text.toString()
+            val tipoContrato = (spinnerTipoContrato.editText as AutoCompleteTextView).text.toString()
+            val distrito = (spinnerDistritoTrabajo.editText as AutoCompleteTextView).text.toString()
+
+            viewModel.registrarTrabajador(
+
+                nombres = nombres,
+                puesto = puesto,
+                jefeInmediato = jefeInmediato,
+                idTipoContrato = obtenerIdTipoContrato(tipoContrato),
+                direccion = direccion,
+                telefono = telefono,
+                idDistritoTrabajo = obtenerIdDistrito(distrito),
+                password = id.toString() // Usando el ID como contraseña por defecto
+            )
+        } catch (e: Exception) {
+            Toast.makeText(this, 
+                "Error al procesar los datos: ${e.message}", 
+                Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun obtenerIdTipoContrato(tipo: String): Int {
+        return when (tipo) {
+            "Tiempo Completo" -> 1
+            "Medio Tiempo" -> 2
+            "Por Horas" -> 3
+            else -> 1
+        }
+    }
+
+    private fun obtenerIdDistrito(distrito: String): Int {
+        return when (distrito) {
+            "San Isidro" -> 1
+            "Miraflores" -> 2
+            "San Borja" -> 3
+            "Surco" -> 4
+            "La Molina" -> 5
+            else -> 1
+        }
     }
 } 

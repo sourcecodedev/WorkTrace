@@ -1,4 +1,4 @@
-package com.upc.worktrace.ui
+package com.upc.worktrace.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
