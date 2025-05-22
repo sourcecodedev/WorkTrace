@@ -42,8 +42,19 @@ class AdminManageWorkersActivity : BaseActivity() {
                 val idExistente = data.getBooleanExtra("ID_EXISTENTE", false)
                 
                 if (id.isNotEmpty() && nombre.isNotEmpty() && !idExistente) {
-                    val nuevoTrabajador = Trabajador(id, nombre, "usuario")
-                    
+                    val nuevoTrabajador = Trabajador(
+                        idTrabajador = 1,
+                        idUsuario = 2,
+                        nombres = "Juan Pérez",
+                        puesto = "Analista de Sistemas",
+                        jefeInmediato = "Carlos Gómez",
+                        idTipoContrato = 3,
+                        direccion = "Av. Siempre Viva 123",
+                        telefono = "987654321",
+                        idDistritoTrabajo = 5
+                    )
+
+
 
                     trabajadores.add(nuevoTrabajador)
                     trabajadoresAdapter.notifyItemInserted(trabajadores.size - 1)
@@ -88,8 +99,8 @@ class AdminManageWorkersActivity : BaseActivity() {
         trabajadoresAdapter = TrabajadoresAdapter(trabajadores) { trabajador ->
             // Acción al hacer clic en un trabajador
             val intent = Intent(this, AdminWorkerDetailActivity::class.java)
-            intent.putExtra("TRABAJADOR_ID", trabajador.id)
-            intent.putExtra("TRABAJADOR_NOMBRE", trabajador.nombre)
+            intent.putExtra("TRABAJADOR_ID", trabajador.idTrabajador)
+            intent.putExtra("TRABAJADOR_NOMBRE", trabajador.nombres)
             startActivity(intent)
         }
         
@@ -121,9 +132,37 @@ class AdminManageWorkersActivity : BaseActivity() {
             trabajadores.addAll(trabajadoresCargados)
         } else {
             // Si no hay datos guardados, agregar algunos trabajadores de ejemplo
-            trabajadores.add(Trabajador("1234", "Yhimy Feria"))
-            trabajadores.add(Trabajador("5678", "Ana Torres"))
-            
+            val trabajadores = mutableListOf<Trabajador>()
+
+            trabajadores.add(
+                Trabajador(
+                    idTrabajador = 1234,
+                    idUsuario = 1,
+                    nombres  = "Yhimy Feria",
+                    puesto = "Ingeniero de Software",
+                    jefeInmediato = "Carlos Gómez",
+                    idTipoContrato = 2,
+                    direccion = "Av. La Marina 123",
+                    telefono = "987654321",
+                    idDistritoTrabajo = 1
+                )
+            )
+
+            trabajadores.add(
+                Trabajador(
+                    idTrabajador = 5678,
+                    idUsuario = 2,
+                    nombres = "Ana Torres",
+                    puesto = "Diseñadora UX",
+                    jefeInmediato = "María López",
+                    idTipoContrato = 3,
+                    direccion = "Calle Los Pinos 456",
+                    telefono = "912345678",
+                    idDistritoTrabajo = 3
+                )
+            )
+
+
             // Guardar estos datos iniciales
             guardarTrabajadores()
         }
@@ -162,7 +201,7 @@ class AdminManageWorkersActivity : BaseActivity() {
             private val btnEliminar: android.widget.ImageButton = itemView.findViewById(R.id.btnEliminar)
             
             fun bind(trabajador: Trabajador) {
-                tvNombre.text = trabajador.nombre
+                tvNombre.text = trabajador.nombres
                 
                 btnDetalle.setOnClickListener {
                     onItemClick(trabajador)
@@ -176,7 +215,7 @@ class AdminManageWorkersActivity : BaseActivity() {
                 btnEliminar.setOnClickListener {
                     AlertDialog.Builder(itemView.context)
                         .setTitle("Eliminar trabajador")
-                        .setMessage("¿Estás seguro de que deseas eliminar a ${trabajador.nombre}?")
+                        .setMessage("¿Estás seguro de que deseas eliminar a ${trabajador.nombres}?")
                         .setPositiveButton("Sí") { dialog, _ ->
                             val position = adapterPosition
                             if (position != RecyclerView.NO_POSITION) {

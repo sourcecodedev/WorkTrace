@@ -116,7 +116,7 @@ class AdminAddWorkerActivity : BaseActivity() {
             val trabajadores = Gson().fromJson<List<Trabajador>>(trabajadoresJson, type)
             
             // Verificar si existe algún trabajador con el mismo ID
-            return trabajadores.any { it.id == id }
+            return trabajadores.any { it.idTrabajador == id.toInt() }
         }
         
         return false
