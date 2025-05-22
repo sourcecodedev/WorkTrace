@@ -12,6 +12,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.upc.worktrace.data.model.Trabajador
 
 class AdminAddWorkerActivity : BaseActivity() {
     
