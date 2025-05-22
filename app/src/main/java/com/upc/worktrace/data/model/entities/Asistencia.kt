@@ -1,4 +1,4 @@
-package com.upc.worktrace.data.model
+package com.upc.worktrace.data.model.entities
 
 data class Asistencia(
     val idAsistencia: Int,

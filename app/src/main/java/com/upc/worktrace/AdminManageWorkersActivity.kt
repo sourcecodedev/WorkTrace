@@ -16,7 +16,7 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.activity.result.ActivityResult
-import com.upc.worktrace.data.model.Trabajador
+import com.upc.worktrace.data.model.entities.Trabajador
 
 class AdminManageWorkersActivity : BaseActivity() {
     

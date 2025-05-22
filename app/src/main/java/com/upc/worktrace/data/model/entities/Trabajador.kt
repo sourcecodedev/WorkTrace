@@ -1,4 +1,4 @@
-package com.upc.worktrace.data.model
+package com.upc.worktrace.data.model.entities
 
 /**
  * Modelo de datos para representar a un trabajador en la aplicación.

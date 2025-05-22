@@ -1,7 +1,7 @@
 package com.upc.worktrace.data.repository
 
-import com.upc.worktrace.data.model.LoginRequest
-import com.upc.worktrace.data.model.LoginResponse
+import com.upc.worktrace.data.model.request.LoginRequest
+import com.upc.worktrace.data.model.response.LoginResponse
 import com.upc.worktrace.data.remote.RetrofitClient
 
 class LoginRepository(owner: String) {
