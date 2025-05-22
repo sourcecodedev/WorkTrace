@@ -1,4 +1,5 @@
 package com.upc.worktrace.data.model.request
 
-class RastreoAsistenciaRequest {
-}
+import com.upc.worktrace.data.model.entities.UbicacionRastreo
+
+class RastreoAsistenciaRequest (val marcarSalidaRequest: UbicacionRastreo)
