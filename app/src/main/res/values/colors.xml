@@ -10,6 +10,7 @@
     <color name="gray">#808080</color>
     
     <!-- Colores personalizados para WorkTrace -->
+    <color name="primary_blue">#0000FF</color>
     <color name="primary">#2196F3</color>
     <color name="primary_dark">#1976D2</color>
     <color name="accent">#03A9F4</color>
