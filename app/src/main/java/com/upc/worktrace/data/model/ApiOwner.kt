@@ -9,7 +9,7 @@ enum class ApiOwner(val baseUrl: String) {
 
     companion object {
         fun fromName(name: String): ApiOwner? {
-            return values().find { it.name.equals(name, ignoreCase = true) }
+            return ApiOwner.entries.find { it.name.equals(name, ignoreCase = true) }
         }
     }
 }
