@@ -6,8 +6,6 @@ import android.util.Log
 import android.widget.Toast
 import com.google.android.material.card.MaterialCardView
 import androidx.appcompat.widget.Toolbar
-import com.upc.worktrace.ui.AdminReportActivity
-import com.upc.worktrace.ui.LoginActivity
 
 class AdminMainActivity : BaseActivity() {
     

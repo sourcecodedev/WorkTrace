@@ -1,7 +1,8 @@
-package com.upc.worktrace.ui
+package com.upc.worktrace
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -21,9 +22,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
-import com.upc.worktrace.R
 
 class AdminReportActivity : AppCompatActivity() {
 
@@ -67,19 +66,19 @@ class AdminReportActivity : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when (tab.position) {
                     0 -> {
-                        lineChart.visibility = android.view.View.VISIBLE
-                        barChart.visibility = android.view.View.GONE
-                        pieChart.visibility = android.view.View.GONE
+                        lineChart.visibility = View.VISIBLE
+                        barChart.visibility = View.GONE
+                        pieChart.visibility = View.GONE
                     }
                     1 -> {
-                        lineChart.visibility = android.view.View.GONE
-                        barChart.visibility = android.view.View.VISIBLE
-                        pieChart.visibility = android.view.View.GONE
+                        lineChart.visibility = View.GONE
+                        barChart.visibility = View.VISIBLE
+                        pieChart.visibility = View.GONE
                     }
                     2 -> {
-                        lineChart.visibility = android.view.View.GONE
-                        barChart.visibility = android.view.View.GONE
-                        pieChart.visibility = android.view.View.VISIBLE
+                        lineChart.visibility = View.GONE
+                        barChart.visibility = View.GONE
+                        pieChart.visibility = View.VISIBLE
                     }
                 }
             }
