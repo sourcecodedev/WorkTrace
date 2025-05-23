@@ -11,7 +11,7 @@ import com.upc.worktrace.data.repository.WorkerRepository
 import kotlinx.coroutines.launch
 
 class WorkerViewModel : ViewModel() {
-    private val repository = WorkerRepository("General")
+    private val repository = WorkerRepository("General", null)
 
     private val _resultadoTrabajador = MutableLiveData<WorkerResponse>()
     val resultadoTrabajador: LiveData<WorkerResponse> = _resultadoTrabajador
@@ -48,7 +48,7 @@ class WorkerViewModel : ViewModel() {
                 val resultado = repository.registrarTrabajador(request)
                 _resultadoTrabajador.postValue(resultado)
             } catch (e: Exception) {
-                _resultadoTrabajador.postValue(WorkerResponse(false, "Error: ${e.message}", null))
+                _resultadoTrabajador.postValue(WorkerResponse(false, "Error: ${e.message}"))
             } finally {
                 _cargando.value = false
             }

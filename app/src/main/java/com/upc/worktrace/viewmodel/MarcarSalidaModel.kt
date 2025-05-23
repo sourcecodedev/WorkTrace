@@ -10,7 +10,7 @@ import com.upc.worktrace.data.repository.MarcarSalidaRepository
 import kotlinx.coroutines.launch
 
 class MarcarSalidaModel: ViewModel() {
-    private val repository = MarcarSalidaRepository("Ever")
+    private val repository = MarcarSalidaRepository("Ever", null)
 
     private val _marcarSalida = MutableLiveData<MarcarSalidaResponse>()
     val resultadoMarcarSalida: LiveData<MarcarSalidaResponse> = _marcarSalida
@@ -31,7 +31,6 @@ class MarcarSalidaModel: ViewModel() {
         _cargando.value = true
         viewModelScope.launch {
             try {
-
                 val request = MarcarSalidaRequest(
                     idAsistencia = idAsistencia,
                     tipoMarcacion = tipoMarcacion,

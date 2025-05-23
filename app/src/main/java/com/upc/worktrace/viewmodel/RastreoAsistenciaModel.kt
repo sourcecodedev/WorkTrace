@@ -9,7 +9,7 @@ import com.upc.worktrace.data.repository.RastreoAsistenciaRepository
 import kotlinx.coroutines.launch
 
 class RastreoAsistenciaModel : ViewModel(){
-    private val repository = RastreoAsistenciaRepository("Ever")
+    private val repository = RastreoAsistenciaRepository("Ever",null)
 
     private val _resueltadoRastreoUbicacion = MutableLiveData<RastreoAsistenciaResponse>()
     val rastreoUbicacion: LiveData<RastreoAsistenciaResponse> = _resueltadoRastreoUbicacion

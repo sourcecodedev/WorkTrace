@@ -6,13 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.upc.worktrace.data.model.request.HorarioDetalleRequest
 import com.upc.worktrace.data.model.response.HorarioDetalleResponse
+import com.upc.worktrace.data.repository.HorarioAsignacionRepository
 import com.upc.worktrace.data.repository.HorarioDetalleRepository
 import kotlinx.coroutines.launch
 
 
 class HorarioDetalleModel: ViewModel(){
-    private val repository = HorarioDetalleRepository("Ever")
 
+    private val repository = HorarioDetalleRepository("Ever", null)
     private val _horarioDetalle = MutableLiveData<HorarioDetalleResponse>()
     val resultadoHorarioDetalle: LiveData<HorarioDetalleResponse> = _horarioDetalle
 

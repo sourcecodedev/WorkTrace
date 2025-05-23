@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel: ViewModel() {
 
-    private val repository = LoginRepository("General")
+    private val repository = LoginRepository("General", null)
 
     private val _loginResult = MutableLiveData<LoginResponse>()
     val loginResult: LiveData<LoginResponse> = _loginResult
@@ -25,7 +25,6 @@ class LoginViewModel: ViewModel() {
                     false, "Error: ${e.message}", null
                 ))
             }
-
         }
     }
 

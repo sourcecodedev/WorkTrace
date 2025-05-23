@@ -7,10 +7,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient {
     private val clients = mutableMapOf<String, ApiService>()
 
-    fun getClient(owner: String): ApiService {
-        return clients.getOrPut(owner.lowercase()) {
-            val baseUrl = ApiOwner.fromName(owner)?.baseUrl
-                ?: throw IllegalArgumentException("Nombre de desarrollador no válido: $owner")
+    fun getClient(owner: String, customBaseUrl: String? = null): ApiService {
+        val key = if (customBaseUrl != null) "$owner-$customBaseUrl" else owner.lowercase()
+        
+        return clients.getOrPut(key) {
+            val baseUrl = customBaseUrl ?: (ApiOwner.fromName(owner)?.baseUrl
+                ?: throw IllegalArgumentException("Nombre de desarrollador no válido: $owner"))
 
             Retrofit.Builder()
                 .baseUrl(baseUrl)
