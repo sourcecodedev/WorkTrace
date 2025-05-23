@@ -20,10 +20,10 @@ class HistorialAsistenciaActivity : BaseActivity() {
     private lateinit var tvFechaFin: TextView
     private lateinit var btnAtras: MaterialButton
     
-    // Lista simulada de trabajadores
+
     private val trabajadores = listOf("Yhimy Feria", "Ana Torres")
     
-    // Datos simulados de asistencia
+
     private val asistencias = listOf(
         Asistencia("15/04", "08:32", true),
         Asistencia("15/04", "17:29", false)
@@ -33,10 +33,10 @@ class HistorialAsistenciaActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_historial_asistencia)
         
-        // Configurar la barra superior
+
         setupToolbar(true, "Historial de Asistencia")
         
-        // Inicializar vistas
+
         etUsuario = findViewById(R.id.etUsuario)
         btnRangoFechas = findViewById(R.id.btnRangoFechas)
         rvAsistencias = findViewById(R.id.rvAsistencias)
@@ -44,22 +44,22 @@ class HistorialAsistenciaActivity : BaseActivity() {
         tvFechaFin = findViewById(R.id.tvFechaFin)
         btnAtras = findViewById(R.id.btnAtras)
         
-        // Configurar el AutoCompleteTextView con la lista de trabajadores
+
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, trabajadores)
         etUsuario.setAdapter(adapter)
         
-        // Configurar el botón para seleccionar rango de fechas
+
         btnRangoFechas.setOnClickListener {
             mostrarSelectorFechas()
         }
         
-        // Configurar el botón atrás
+
         btnAtras.setOnClickListener {
-            // Simplemente cerramos la actividad para volver a la anterior
+
             finish()
         }
         
-        // Configurar el RecyclerView
+
         val asistenciasAdapter = AsistenciasAdapter(asistencias)
         rvAsistencias.layoutManager = LinearLayoutManager(this)
         rvAsistencias.adapter = asistenciasAdapter
@@ -71,29 +71,28 @@ class HistorialAsistenciaActivity : BaseActivity() {
             .build()
             
         dateRangePicker.addOnPositiveButtonClickListener { selection ->
-            // Se seleccionó un rango de fechas
+
             val startDate = selection.first
             val endDate = selection.second
             
-            // Formatear las fechas
+
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             val startDateString = dateFormat.format(Date(startDate))
             val endDateString = dateFormat.format(Date(endDate))
             
-            // Actualizar el botón con el rango seleccionado
+
             btnRangoFechas.text = "$startDateString - $endDateString"
             
-            // También podríamos actualizar la lista de asistencias según el rango seleccionado
-            // Por ahora, simplemente mantenemos los datos simulados
+
         }
         
         dateRangePicker.show(supportFragmentManager, "DATE_RANGE_PICKER")
     }
     
-    // Clase de datos para representar una asistencia
+
     data class Asistencia(val fecha: String, val hora: String, val esEntrada: Boolean)
     
-    // Adapter para la lista de asistencias
+
     inner class AsistenciasAdapter(
         private val asistencias: List<Asistencia>
     ) : RecyclerView.Adapter<AsistenciasAdapter.AsistenciaViewHolder>() {
@@ -120,7 +119,7 @@ class HistorialAsistenciaActivity : BaseActivity() {
                 tvFecha.text = asistencia.fecha
                 tvHora.text = asistencia.hora
                 
-                // Mostrar icono según si es entrada o salida
+
                 ivEstado.setImageResource(
                     if (asistencia.esEntrada) R.drawable.ic_entrada else R.drawable.ic_salida
                 )

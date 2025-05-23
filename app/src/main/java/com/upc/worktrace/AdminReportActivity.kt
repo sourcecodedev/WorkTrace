@@ -199,14 +199,7 @@ class AdminReportActivity : AppCompatActivity() {
     }
 
     private fun updateCharts() {
-        // Esta función se llamaría cuando el usuario presione el botón de filtrar
-        // Aquí actualizarías los gráficos con datos filtrados según las selecciones
-        // Por ahora, solo recargamos los gráficos con los mismos datos de ejemplo
 
-        // En una aplicación real, aquí harías peticiones a tu base de datos
-        // o API para obtener datos según los filtros seleccionados
-
-        // Luego actualizarías los conjuntos de datos y refrescarías los gráficos
         setupCharts()
     }
 

@@ -7,7 +7,7 @@
     tools:context=".AdminMainActivity"
     android:fitsSystemWindows="true">
 
-    <!-- Incluir el toolbar -->
+
     <include
         android:id="@+id/toolbar_worktrace"
         layout="@layout/toolbar_worktrace"

@@ -14,7 +14,7 @@ class WorkerCheckInActivity : AppCompatActivity() {
     private val handler = Handler(Looper.getMainLooper())
     private val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale("es"))
     private val timeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
-    private val timeZone = TimeZone.getTimeZone("America/Lima") // UTC-5
+    private val timeZone = TimeZone.getTimeZone("America/Lima") 
 
     init {
         timeFormat.timeZone = timeZone
@@ -25,7 +25,7 @@ class WorkerCheckInActivity : AppCompatActivity() {
             val currentTime = Calendar.getInstance(timeZone)
             tvFecha.text = dateFormat.format(currentTime.time)
             tvHora.text = timeFormat.format(currentTime.time)
-            handler.postDelayed(this, 1000) // Actualizar cada segundo
+            handler.postDelayed(this, 1000)
         }
     }
 
@@ -36,13 +36,13 @@ class WorkerCheckInActivity : AppCompatActivity() {
         tvFecha = findViewById(R.id.tvFecha)
         tvHora = findViewById(R.id.tvHora)
 
-        // Iniciar la actualización de la hora
+
         handler.post(updateTime)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        // Detener la actualización de la hora cuando la actividad se destruye
+
         handler.removeCallbacks(updateTime)
     }
 } 

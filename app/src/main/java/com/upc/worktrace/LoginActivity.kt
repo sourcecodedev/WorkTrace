@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-        // Configurar la barra de estado
+
         window.statusBarColor = ContextCompat.getColor(this, android.R.color.transparent)
         WindowCompat.setDecorFitsSystemWindows(window, true)
 

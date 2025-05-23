@@ -64,13 +64,13 @@
                 android:background="#E0E0E0"
                 android:layout_marginBottom="12dp" />
 
-            <!-- Días de la semana -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Día -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                         android:textSize="18sp"
                         android:textColor="#37474F" />
                 </LinearLayout>
-                <!-- Repetir para los otros días -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

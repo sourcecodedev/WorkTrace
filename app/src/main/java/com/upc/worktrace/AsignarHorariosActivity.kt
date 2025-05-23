@@ -25,17 +25,17 @@ class AsignarHorariosActivity : BaseActivity() {
     private lateinit var btnGuardar: MaterialButton
     private lateinit var btnCancelar: MaterialButton
 
-    // Lista simulada de trabajadores
+
     private val trabajadores = listOf("Yhimy Feria", "Ana Torres")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_asignar_horarios)
 
-        // Configurar la barra superior
+
         setupToolbar(true, "Asignar Horario")
 
-        // Inicializar vistas
+
         etNombreTrabajador = findViewById(R.id.etNombreTrabajador)
         cbLunes = findViewById(R.id.cbLunes)
         cbMartes = findViewById(R.id.cbMartes)
@@ -49,11 +49,11 @@ class AsignarHorariosActivity : BaseActivity() {
         btnGuardar = findViewById(R.id.btnGuardar)
         btnCancelar = findViewById(R.id.btnCancelar)
 
-        // Configurar el AutoCompleteTextView con la lista de trabajadores
+
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, trabajadores)
         etNombreTrabajador.setAdapter(adapter)
 
-        // Configurar los botones de hora
+
         btnHoraEntrada.setOnClickListener {
             mostrarSelectorHora(true)
         }
@@ -62,14 +62,14 @@ class AsignarHorariosActivity : BaseActivity() {
             mostrarSelectorHora(false)
         }
 
-        // Configurar el botón de guardar
+
         btnGuardar.setOnClickListener {
             guardarHorario()
         }
 
-        // Configurar el botón de cancelar
+
         btnCancelar.setOnClickListener {
-            // Simplemente cerramos la actividad para volver a la anterior
+
             finish()
         }
     }
@@ -108,7 +108,7 @@ class AsignarHorariosActivity : BaseActivity() {
         val horaEntrada = btnHoraEntrada.text.toString()
         val horaSalida = btnHoraSalida.text.toString()
 
-        // Validación básica
+
         if (nombreTrabajador.isEmpty()) {
             Toast.makeText(this, "Debe seleccionar un trabajador", Toast.LENGTH_SHORT).show()
             return
@@ -124,10 +124,10 @@ class AsignarHorariosActivity : BaseActivity() {
             return
         }
 
-        // Simulación del ID de horario asignado (reemplazar con valor real)
+
         val idHorarioAsignacion = 1
 
-        // Crear lista de días seleccionados (valores del 1 al 6 para Lunes a Sábado)
+
         val diasSeleccionados = mutableListOf<Int>()
         if (tieneLunes) diasSeleccionados.add(1)
         if (tieneMartes) diasSeleccionados.add(2)
@@ -136,9 +136,9 @@ class AsignarHorariosActivity : BaseActivity() {
         if (tieneViernes) diasSeleccionados.add(5)
         if (tieneSabado) diasSeleccionados.add(6)
 
-        // Enviar cada día a la API
+
         for (dia in diasSeleccionados) {
-            //enviarHorarioAlServidor(idHorarioAsignacion, dia, horaEntrada, horaSalida)
+
         }
 
         Toast.makeText(this, "Horario asignado correctamente", Toast.LENGTH_SHORT).show()

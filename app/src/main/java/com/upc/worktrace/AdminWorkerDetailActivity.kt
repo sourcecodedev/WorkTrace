@@ -26,7 +26,7 @@ class AdminWorkerDetailActivity : BaseActivity() {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_admin_worker_detail)
             
-            // Obtener datos del intent
+
             val id = intent.getStringExtra("TRABAJADOR_ID") ?: "-"
             val nombre = intent.getStringExtra("TRABAJADOR_NOMBRE") ?: "-"
             val rol = intent.getStringExtra("TRABAJADOR_ROL") ?: "-"
@@ -37,10 +37,10 @@ class AdminWorkerDetailActivity : BaseActivity() {
             val telefono = intent.getStringExtra("TRABAJADOR_TELEFONO") ?: "-"
             val distrito = intent.getStringExtra("TRABAJADOR_DISTRITO") ?: "-"
             
-            // Configurar la barra superior
+
             setupToolbar(true, nombre)
             
-            // Inicializar vistas
+
             tvId = findViewById(R.id.tvId)
             tvNombre = findViewById(R.id.tvNombre)
             tvRol = findViewById(R.id.tvRol)
@@ -53,7 +53,7 @@ class AdminWorkerDetailActivity : BaseActivity() {
             btnEditar = findViewById(R.id.btnEditar)
             btnAtras = findViewById(R.id.btnAtras)
             
-            // Mostrar datos del trabajador
+
             tvId.text = id
             tvNombre.text = nombre
             tvRol.text = rol
@@ -64,7 +64,7 @@ class AdminWorkerDetailActivity : BaseActivity() {
             tvTelefono.text = telefono
             tvDistritoAsignado.text = distrito
             
-            // Configurar el botón de editar
+
             btnEditar.setOnClickListener {
                 try {
                     Log.d("DetallesTrabajador", "Botón editar presionado")
@@ -86,7 +86,7 @@ class AdminWorkerDetailActivity : BaseActivity() {
                 }
             }
             
-            // Configurar el botón atrás
+
             btnAtras.setOnClickListener {
                 finish()
             }

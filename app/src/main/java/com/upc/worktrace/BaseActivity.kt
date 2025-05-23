@@ -20,8 +20,7 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         
         try {
-            // La configuración de pantalla completa se realizará después de setContentView en setupToolbar
-            // para evitar problemas con la inicialización de la vista
+
         } catch (e: Exception) {
             Log.e(TAG, "Error en onCreate de BaseActivity: ${e.message}")
             e.printStackTrace()
@@ -37,22 +36,22 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     protected fun setupToolbar(showBackButton: Boolean = false, title: String? = null) {
         try {
-            // Configurar la visualización en pantalla completa
+
             WorkTraceUtils.configureFullScreenMode(this)
             
             toolbar = findViewById(R.id.toolbar_worktrace)
             setSupportActionBar(toolbar)
             
-            // Mostrar el título en la ActionBar
+
             supportActionBar?.setDisplayShowTitleEnabled(true)
             
-            // Configurar el botón para volver atrás si es necesario
+
             if (showBackButton) {
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
                 supportActionBar?.setDisplayShowHomeEnabled(true)
             }
             
-            // Configurar el título personalizado si es necesario
+
             if (title != null) {
                 supportActionBar?.title = title
             }

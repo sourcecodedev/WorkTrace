@@ -15,7 +15,7 @@ class EditarTrabajadorActivity : BaseActivity() {
     private lateinit var btnGuardar: MaterialButton
     private lateinit var btnCancelar: MaterialButton
     
-    // Variables para guardar los datos originales
+
     private var idOriginal = ""
     private var nombreOriginal = ""
     
@@ -27,35 +27,35 @@ class EditarTrabajadorActivity : BaseActivity() {
             setContentView(R.layout.activity_editar_trabajador)
             Log.d("EditarTrabajador", "Layout cargado")
             
-            // Obtener datos del intent
+
             idOriginal = intent.getStringExtra("TRABAJADOR_ID") ?: ""
             nombreOriginal = intent.getStringExtra("TRABAJADOR_NOMBRE") ?: ""
             Log.d("EditarTrabajador", "Datos recibidos: ID=$idOriginal, NOMBRE=$nombreOriginal")
             
-            // Configurar la barra superior
+
             setupToolbar(true, "Editar Trabajador")
             Log.d("EditarTrabajador", "Toolbar configurado")
             
-            // Inicializar vistas
+
             etId = findViewById(R.id.etId)
             etNombre = findViewById(R.id.etNombre)
             btnGuardar = findViewById(R.id.btnGuardar)
             btnCancelar = findViewById(R.id.btnCancelar)
             Log.d("EditarTrabajador", "Vistas inicializadas")
             
-            // Mostrar datos actuales del trabajador
+
             etId.editText?.setText(idOriginal)
             etNombre.editText?.setText(nombreOriginal)
             Log.d("EditarTrabajador", "Datos mostrados en campos")
             
-            // Configurar el botón de guardar
+
             btnGuardar.setOnClickListener {
                 if (validarDatos()) {
                     mostrarDialogoConfirmacionActualizar()
                 }
             }
             
-            // Configurar el botón de cancelar
+
             btnCancelar.setOnClickListener {
                 finish()
             }
@@ -81,7 +81,7 @@ class EditarTrabajadorActivity : BaseActivity() {
                 finish()
             }
             .setNegativeButton("Cancelar") { _, _ ->
-                // Restaurar valores originales
+
                 etId.editText?.setText(idOriginal)
                 etNombre.editText?.setText(nombreOriginal)
             }
@@ -92,7 +92,7 @@ class EditarTrabajadorActivity : BaseActivity() {
         val id = etId.editText?.text.toString().trim()
         val nombre = etNombre.editText?.text.toString().trim()
         
-        // Validación
+
         var isValid = true
         
         if (id.isEmpty()) {

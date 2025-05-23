@@ -76,10 +76,10 @@ class AdminManageWorkersActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_manage_workers)
         
-        // Configurar la barra superior
+
         setupToolbar(true, "Trabajadores")
         
-        // Inicializar vistas
+
         rvTrabajadores = findViewById(R.id.rvTrabajadores)
         btnAgregarTrabajador = findViewById(R.id.btnAgregarTrabajador)
         btnAtras = findViewById(R.id.btnAtras)
@@ -97,7 +97,7 @@ class AdminManageWorkersActivity : BaseActivity() {
         
 
         trabajadoresAdapter = TrabajadoresAdapter(trabajadores) { trabajador ->
-            // Acción al hacer clic en un trabajador
+
             val intent = Intent(this, AdminWorkerDetailActivity::class.java)
             intent.putExtra("TRABAJADOR_ID", trabajador.idTrabajador.toString())
             intent.putExtra("TRABAJADOR_NOMBRE", trabajador.nombres)
@@ -114,13 +114,13 @@ class AdminManageWorkersActivity : BaseActivity() {
         rvTrabajadores.layoutManager = LinearLayoutManager(this)
         rvTrabajadores.adapter = trabajadoresAdapter
         
-        // Configurar el botón de agregar trabajador
+
         btnAgregarTrabajador.setOnClickListener {
             val intent = Intent(this, AdminAddWorkerActivity::class.java)
             agregarTrabajadorLauncher.launch(intent)
         }
         
-        // Configurar el botón atrás
+
         btnAtras.setOnClickListener {
             finish()
         }
@@ -134,11 +134,11 @@ class AdminManageWorkersActivity : BaseActivity() {
             val type = object : TypeToken<List<Trabajador>>() {}.type
             val trabajadoresCargados = Gson().fromJson<List<Trabajador>>(trabajadoresJson, type)
             
-            // Limpiar la lista actual y agregar los trabajadores cargados
+
             trabajadores.clear()
             trabajadores.addAll(trabajadoresCargados)
         } else {
-            // Si no hay datos guardados, agregar algunos trabajadores de ejemplo
+
             val trabajadores = mutableListOf<Trabajador>()
 
             trabajadores.add(
@@ -170,7 +170,7 @@ class AdminManageWorkersActivity : BaseActivity() {
             )
 
 
-            // Guardar estos datos iniciales
+
             guardarTrabajadores()
         }
     }
@@ -183,7 +183,7 @@ class AdminManageWorkersActivity : BaseActivity() {
         editor.apply()
     }
     
-    // Adapter para la lista de trabajadores
+
     inner class TrabajadoresAdapter(
         private val trabajadores: List<Trabajador>,
         private val onItemClick: (Trabajador) -> Unit
@@ -214,7 +214,7 @@ class AdminManageWorkersActivity : BaseActivity() {
                     onItemClick(trabajador)
                 }
                 
-                // También permitimos hacer clic en toda la fila
+
                 itemView.setOnClickListener {
                     onItemClick(trabajador)
                 }

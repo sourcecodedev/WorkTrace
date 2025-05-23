@@ -24,10 +24,10 @@ class AdminMainActivity : BaseActivity() {
             setSupportActionBar(toolbar)
             setupToolbar(false)
             
-            // Inicializar vistas
+
             initializeViews()
             
-            // Configurar listeners
+
             setupClickListeners()
 
             val btnCerrarSesion = findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCerrarSesion)
@@ -50,7 +50,7 @@ class AdminMainActivity : BaseActivity() {
             cvVerAsistencia = findViewById(R.id.cvVerAsistencia)
             cvExportarReporte = findViewById(R.id.cvExportarReporte)
             
-            // Verificar que todas las vistas se inicializaron correctamente
+
             if (!::cvGestionarTrabajadores.isInitialized ||
                 !::cvAsignarHorarios.isInitialized ||
                 !::cvVerAsistencia.isInitialized ||
@@ -64,7 +64,7 @@ class AdminMainActivity : BaseActivity() {
     }
     
     private fun setupClickListeners() {
-        // Configurar listeners
+
         cvGestionarTrabajadores.setOnClickListener {
             val intent = Intent(this, AdminManageWorkersActivity::class.java)
             startActivity(intent)

@@ -82,7 +82,7 @@
                     android:layout_marginTop="8dp" />
             </LinearLayout>
 
-            <!-- Marcar Salida -->
+
             <LinearLayout
                 android:id="@+id/llSalida"
                 android:layout_width="0dp"
@@ -110,7 +110,7 @@
                     android:layout_marginTop="8dp" />
             </LinearLayout>
 
-            <!-- Ver Horario -->
+
             <LinearLayout
                 android:id="@+id/llHorario"
                 android:layout_width="0dp"
@@ -137,7 +137,7 @@
                     android:layout_marginTop="8dp" />
             </LinearLayout>
 
-            <!-- Mi Historial -->
+
             <LinearLayout
                 android:id="@+id/llHistorial"
                 android:layout_width="0dp"

@@ -17,7 +17,7 @@ class AdminAddWorkerActivity : AppCompatActivity() {
 
     private lateinit var viewModel: WorkerViewModel
     
-    // Vistas
+
     private lateinit var etId: TextInputLayout
     private lateinit var etNombres: TextInputLayout
     private lateinit var etPuesto: TextInputLayout
@@ -30,14 +30,14 @@ class AdminAddWorkerActivity : AppCompatActivity() {
     private lateinit var btnCancelar: MaterialButton
     private lateinit var progressBar: ProgressBar
 
-    // Lista de campos para validación
+
     private val camposRequeridos = mutableListOf<Pair<TextInputLayout, TextInputEditText>>()
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_add_worker)
 
-        // Inicializar ViewModel
+
         viewModel = ViewModelProvider(this)[WorkerViewModel::class.java]
 
         initializeViews()
@@ -82,7 +82,7 @@ class AdminAddWorkerActivity : AppCompatActivity() {
     }
 
     private fun setupSpinners() {
-        // Configurar Spinner Tipo Contrato
+
         val tiposContrato = listOf("Tiempo Completo", "Medio Tiempo", "Por Horas")
         val adapterTipoContrato = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, tiposContrato)
         (spinnerTipoContrato.editText as? AutoCompleteTextView)?.setAdapter(adapterTipoContrato)
@@ -127,7 +127,7 @@ class AdminAddWorkerActivity : AppCompatActivity() {
     private fun validarCampos(): Boolean {
         var isValid = true
         
-        // Validar campos requeridos
+
         camposRequeridos.forEach { (layout, editText) ->
             if (editText.text.toString().trim().isEmpty()) {
                 layout.error = "Campo requerido"
@@ -137,7 +137,7 @@ class AdminAddWorkerActivity : AppCompatActivity() {
             }
         }
 
-        // Validar spinners
+
         if ((spinnerTipoContrato.editText as? AutoCompleteTextView)?.text.toString().isEmpty()) {
             spinnerTipoContrato.error = "Seleccione un tipo de contrato"
             isValid = false
@@ -152,15 +152,14 @@ class AdminAddWorkerActivity : AppCompatActivity() {
             spinnerDistritoTrabajo.error = null
         }
 
-        // Validaciones específicas
-        // Validar formato de teléfono (9 dígitos)
+
         val telefono = etTelefono.editText?.text.toString()
         if (telefono.isNotEmpty() && !telefono.matches(Regex("^[0-9]{9}$"))) {
             etTelefono.error = "Ingrese un número válido de 9 dígitos"
             isValid = false
         }
 
-        // Validar que el ID sea numérico
+
         val id = etId.editText?.text.toString()
         if (id.isNotEmpty() && !id.matches(Regex("^[0-9]+$"))) {
             etId.error = "Ingrese un ID válido (solo números)"
