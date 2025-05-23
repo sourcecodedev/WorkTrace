@@ -14,30 +14,37 @@ import com.upc.worktrace.data.model.response.MarcarSalidaResponse
 import com.upc.worktrace.data.model.response.RastreoAsistenciaResponse
 import com.upc.worktrace.data.model.response.TipoContratoResponse
 import com.upc.worktrace.data.model.response.WorkerResponse
-<<<<<<< Updated upstream
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.PUT
-import retrofit2.http.Path
-=======
 import retrofit2.http.*
->>>>>>> Stashed changes
 
 interface ApiService {
-
+    // Autenticación
     @POST("/api/login/admin")
     suspend fun login(@Body request: LoginRequest): LoginResponse
 
     @POST("/api/login/worker")
     suspend fun loginWorker(@Body request: LoginRequest): LoginResponse
 
-<<<<<<< Updated upstream
+    // Gestión de Workers
     @POST("/api/Worker/registrar")
     suspend fun registrarWorker(@Body request: WorkerRequest): WorkerResponse
 
+    @GET("/api/worker")
+    suspend fun obtenerTodosTrabajadores(): WorkerResponse
+
+    @GET("/api/worker/{id}")
+    suspend fun obtenerTrabajadorPorId(@Path("id") trabajadorId: Int): WorkerResponse
+
+    @PUT("/api/worker/{id}")
+    suspend fun actualizarTrabajador(
+        @Path("id") trabajadorId: Int,
+        @Body request: WorkerRequest
+    ): WorkerResponse
+
+    @DELETE("/api/worker/{id}")
+    suspend fun eliminarTrabajador(@Path("id") trabajadorId: Int): WorkerResponse
+
+    // Gestión de Horarios
     @POST("/v1/horario-asignacion")
     suspend fun registrarHorarioAsignacion(@Body request: HorarioAsignacionRequest): HorarioAsignacionResponse
 
@@ -50,45 +57,10 @@ interface ApiService {
     @POST("/v1/rastreo-asistencia")
     suspend fun mostrarRastreo(@Body request: RastreoAsistenciaRequest): RastreoAsistenciaResponse
 
-    @POST("trabajadores")
-    suspend fun registrarTrabajador(@Body request: WorkerRequest): WorkerResponse
-
-    @GET("trabajadores")
-    suspend fun obtenerTodosTrabajadores(): WorkerResponse
-
-    @GET("trabajadores/{id}")
-    suspend fun obtenerTrabajadorPorId(@Path("id") trabajadorId: Int): WorkerResponse
-
-    @PUT("trabajadores/{id}")
-=======
-    // Endpoints de Trabajador
-    @POST("/api/worker")
-    suspend fun registrarTrabajador(@Body request: WorkerRequest): WorkerResponse
-
-    @GET("/api/worker")
-    suspend fun obtenerTodosTrabajadores(): WorkerResponse
-
-    @GET("/api/worker/{id}")
-    suspend fun obtenerTrabajadorPorId(@Path("id") trabajadorId: Int): WorkerResponse
-
-    @PUT("/api/worker/{id}")
->>>>>>> Stashed changes
-    suspend fun actualizarTrabajador(
-        @Path("id") trabajadorId: Int,
-        @Body request: WorkerRequest
-    ): WorkerResponse
-
-<<<<<<< Updated upstream
-    @DELETE("trabajadores/{id}")
-    suspend fun eliminarTrabajador(@Path("id") trabajadorId: Int): WorkerResponse
-
+    // Endpoints de consulta
     @GET("api/tipotrabajo")
     suspend fun listarTiposTrabajo(): TipoContratoResponse
 
     @GET("api/distrito")
     suspend fun listarDistritos(): Response<List<DistritoResponse>>
-=======
-    @DELETE("/api/worker/{id}")
-    suspend fun eliminarTrabajador(@Path("id") trabajadorId: Int): WorkerResponse
->>>>>>> Stashed changes
 }
