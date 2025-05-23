@@ -1,23 +1,33 @@
 package com.upc.worktrace
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
+import android.widget.AdapterView
 import android.widget.AutoCompleteTextView
 import android.widget.ProgressBar
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.upc.worktrace.ui.adapter.CustomSpinnerAdapter
+import com.upc.worktrace.ui.adapter.SpinnerItem
 import com.upc.worktrace.viewmodel.WorkerViewModel
+import com.upc.worktrace.viewmodel.DistritoViewModel
+import com.upc.worktrace.viewmodel.TipoContratoViewModel
 
 class AdminAddWorkerActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: WorkerViewModel
-    
+    private val TAG = "AdminAddWorkerActivity"
 
+    private lateinit var viewModel: WorkerViewModel
+    private lateinit var distritoViewModel: DistritoViewModel
+    private lateinit var tipoContratoViewModel: TipoContratoViewModel
+    
+    // Vistas
     private lateinit var etId: TextInputLayout
     private lateinit var etNombres: TextInputLayout
     private lateinit var etPuesto: TextInputLayout
@@ -30,22 +40,32 @@ class AdminAddWorkerActivity : AppCompatActivity() {
     private lateinit var btnCancelar: MaterialButton
     private lateinit var progressBar: ProgressBar
 
-
+    // Lista de campos para validación
     private val camposRequeridos = mutableListOf<Pair<TextInputLayout, TextInputEditText>>()
     
+    private var selectedDistritoId: Int? = null
+    private var selectedTipoContratoId: Int? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_add_worker)
-
-
-        viewModel = ViewModelProvider(this)[WorkerViewModel::class.java]
-
+        
+        Log.d(TAG, "Iniciando AdminAddWorkerActivity")
+        
+        initializeViewModels()
         initializeViews()
         setupToolbar()
         setupCamposRequeridos()
         setupSpinners()
         setupObservers()
         setupListeners()
+    }
+
+    private fun initializeViewModels() {
+        Log.d(TAG, "Inicializando ViewModels")
+        viewModel = ViewModelProvider(this)[WorkerViewModel::class.java]
+        distritoViewModel = ViewModelProvider(this)[DistritoViewModel::class.java]
+        tipoContratoViewModel = ViewModelProvider(this)[TipoContratoViewModel::class.java]
     }
 
     private fun initializeViews() {
@@ -82,17 +102,104 @@ class AdminAddWorkerActivity : AppCompatActivity() {
     }
 
     private fun setupSpinners() {
+        Log.d(TAG, "Configurando spinners")
+        setupTipoContratoSpinner()
+        setupDistritoTrabajoSpinner()
+    }
 
-        val tiposContrato = listOf("Tiempo Completo", "Medio Tiempo", "Por Horas")
-        val adapterTipoContrato = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, tiposContrato)
-        (spinnerTipoContrato.editText as? AutoCompleteTextView)?.setAdapter(adapterTipoContrato)
-        (spinnerTipoContrato.editText as? AutoCompleteTextView)?.setText(tiposContrato[0], false)
+    private fun setupTipoContratoSpinner() {
+        Log.d(TAG, "Configurando spinner de tipo de contrato")
+        
+        // Asegurarse de que el AutoCompleteTextView esté configurado correctamente
+        val autoComplete = spinnerTipoContrato.editText as? AutoCompleteTextView
+        if (autoComplete == null) {
+            Log.e(TAG, "Error: spinnerTipoContrato no es un AutoCompleteTextView")
+            return
+        }
 
-        // Configurar Spinner Distrito Trabajo
-        val distritos = listOf("San Isidro", "Miraflores", "San Borja", "Surco", "La Molina")
-        val adapterDistrito = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, distritos)
-        (spinnerDistritoTrabajo.editText as? AutoCompleteTextView)?.setAdapter(adapterDistrito)
-        (spinnerDistritoTrabajo.editText as? AutoCompleteTextView)?.setText(distritos[0], false)
+        // Deshabilitar el spinner mientras se cargan los datos
+        autoComplete.isEnabled = false
+        
+        tipoContratoViewModel.tiposContratoSpinner.observe(this) { tiposContrato ->
+            Log.d(TAG, "Recibidos tipos de contrato: $tiposContrato")
+            
+            if (tiposContrato.isNotEmpty()) {
+                val adapter = CustomSpinnerAdapter(this, tiposContrato)
+                autoComplete.setAdapter(adapter)
+                
+                // Seleccionar el primer item por defecto
+                autoComplete.setText(tiposContrato[0].nombre, false)
+                selectedTipoContratoId = tiposContrato[0].id
+                
+                // Habilitar el spinner
+                autoComplete.isEnabled = true
+            }
+
+            autoComplete.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
+                val spinnerAdapter = parent.adapter as? CustomSpinnerAdapter<Int>
+                spinnerAdapter?.getSelectedItemId(position)?.let { id ->
+                    selectedTipoContratoId = id
+                    val nombreTipoContrato = tiposContrato.find { it.id == id }?.nombre
+                    Log.d(TAG, "Tipo de contrato seleccionado: $nombreTipoContrato (ID: $id)")
+                }
+            }
+        }
+
+        tipoContratoViewModel.error.observe(this) { errorMsg ->
+            errorMsg?.let {
+                Log.e(TAG, "Error en tipos de contrato: $it")
+                Toast.makeText(this, "Error al cargar tipos de contrato: $it", Toast.LENGTH_LONG).show()
+                // Habilitar el spinner en caso de error
+                autoComplete.isEnabled = true
+            }
+        }
+
+        tipoContratoViewModel.isLoading.observe(this) { isLoading ->
+            progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+            // Deshabilitar el spinner durante la carga
+            autoComplete.isEnabled = !isLoading
+        }
+    }
+
+    private fun setupDistritoTrabajoSpinner() {
+        distritoViewModel.distritosSpinner.observe(this) { distritos ->
+            val adapter = CustomSpinnerAdapter(this, distritos)
+            (spinnerDistritoTrabajo.editText as? AutoCompleteTextView)?.let { autoComplete ->
+                autoComplete.setAdapter(adapter)
+                
+                // Si hay distritos disponibles, seleccionar el primero por defecto
+                if (distritos.isNotEmpty()) {
+                    autoComplete.setText(distritos[0].nombre, false)
+                    selectedDistritoId = distritos[0].id
+                }
+
+                // Manejar la selección del distrito
+                autoComplete.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
+                    val spinnerAdapter = parent.adapter as? CustomSpinnerAdapter<Int>
+                    spinnerAdapter?.getSelectedItemId(position)?.let { id ->
+                        selectedDistritoId = id
+                        // Opcional: mostrar un mensaje de confirmación
+                        val nombreDistrito = distritos.find { it.id == id }?.nombre
+                        Toast.makeText(this, "Distrito seleccionado: $nombreDistrito (ID: $id)", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
+        // Observar errores
+        distritoViewModel.error.observe(this) { errorMsg ->
+            errorMsg?.let {
+                Toast.makeText(this, "Error al cargar distritos: $it", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        // Observar el estado de carga
+        distritoViewModel.isLoading.observe(this) { isLoading ->
+            progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
+        // Cargar los distritos
+        distritoViewModel.cargarDistritos()
     }
 
     private fun setupObservers() {
@@ -127,7 +234,7 @@ class AdminAddWorkerActivity : AppCompatActivity() {
     private fun validarCampos(): Boolean {
         var isValid = true
         
-
+        // Validar campos requeridos
         camposRequeridos.forEach { (layout, editText) ->
             if (editText.text.toString().trim().isEmpty()) {
                 layout.error = "Campo requerido"
@@ -137,7 +244,7 @@ class AdminAddWorkerActivity : AppCompatActivity() {
             }
         }
 
-
+        // Validar spinners
         if ((spinnerTipoContrato.editText as? AutoCompleteTextView)?.text.toString().isEmpty()) {
             spinnerTipoContrato.error = "Seleccione un tipo de contrato"
             isValid = false
@@ -152,14 +259,15 @@ class AdminAddWorkerActivity : AppCompatActivity() {
             spinnerDistritoTrabajo.error = null
         }
 
-
+        // Validaciones específicas
+        // Validar formato de teléfono (9 dígitos)
         val telefono = etTelefono.editText?.text.toString()
         if (telefono.isNotEmpty() && !telefono.matches(Regex("^[0-9]{9}$"))) {
             etTelefono.error = "Ingrese un número válido de 9 dígitos"
             isValid = false
         }
 
-
+        // Validar que el ID sea numérico
         val id = etId.editText?.text.toString()
         if (id.isNotEmpty() && !id.matches(Regex("^[0-9]+$"))) {
             etId.error = "Ingrese un ID válido (solo números)"
@@ -177,44 +285,27 @@ class AdminAddWorkerActivity : AppCompatActivity() {
             val jefeInmediato = etJefeInmediato.editText?.text.toString()
             val direccion = etDireccion.editText?.text.toString()
             val telefono = etTelefono.editText?.text.toString()
-            val tipoContrato = (spinnerTipoContrato.editText as AutoCompleteTextView).text.toString()
-            val distrito = (spinnerDistritoTrabajo.editText as AutoCompleteTextView).text.toString()
+
+            // Validar que los IDs estén seleccionados
+            val idTipoContrato = selectedTipoContratoId
+                ?: throw Exception("Debe seleccionar un tipo de contrato")
+            val idDistrito = selectedDistritoId
+                ?: throw Exception("Debe seleccionar un distrito")
 
             viewModel.registrarTrabajador(
-
                 nombres = nombres,
                 puesto = puesto,
                 jefeInmediato = jefeInmediato,
-                idTipoContrato = obtenerIdTipoContrato(tipoContrato),
+                idTipoContrato = idTipoContrato,
                 direccion = direccion,
                 telefono = telefono,
-                idDistritoTrabajo = obtenerIdDistrito(distrito),
+                idDistritoTrabajo = idDistrito,
                 password = id.toString() // Usando el ID como contraseña por defecto
             )
         } catch (e: Exception) {
             Toast.makeText(this, 
                 "Error al procesar los datos: ${e.message}", 
                 Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun obtenerIdTipoContrato(tipo: String): Int {
-        return when (tipo) {
-            "Tiempo Completo" -> 1
-            "Medio Tiempo" -> 2
-            "Por Horas" -> 3
-            else -> 1
-        }
-    }
-
-    private fun obtenerIdDistrito(distrito: String): Int {
-        return when (distrito) {
-            "San Isidro" -> 1
-            "Miraflores" -> 2
-            "San Borja" -> 3
-            "Surco" -> 4
-            "La Molina" -> 5
-            else -> 1
         }
     }
 } 
