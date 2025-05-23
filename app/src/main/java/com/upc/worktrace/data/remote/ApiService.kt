@@ -63,4 +63,6 @@ interface ApiService {
 
     @GET("api/distrito")
     suspend fun listarDistritos(): Response<List<DistritoResponse>>
+
+    fun registrarTrabajador(request: WorkerRequest): WorkerResponse
 }
