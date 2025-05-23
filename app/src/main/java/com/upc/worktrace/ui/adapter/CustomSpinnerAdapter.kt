@@ -1,6 +1,7 @@
 package com.upc.worktrace.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ class CustomSpinnerAdapter<T>(
     context: Context,
     private val items: List<SpinnerItem<T>>
 ) : ArrayAdapter<SpinnerItem<T>>(context, R.layout.spinner_item, items) {
+    private val TAG = "CustomSpinnerAdapter"
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         return createItemView(position, convertView, parent)
@@ -32,11 +34,18 @@ class CustomSpinnerAdapter<T>(
         return view
     }
 
+    override fun getItem(position: Int): SpinnerItem<T>? {
+        return items.getOrNull(position)
+    }
+
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
     fun getSelectedItemId(position: Int): T? {
-        return items.getOrNull(position)?.id
+        Log.d(TAG, "Obteniendo ID para posición $position")
+        val item = items.getOrNull(position)
+        Log.d(TAG, "Item seleccionado: $item")
+        return item?.id
     }
 } 

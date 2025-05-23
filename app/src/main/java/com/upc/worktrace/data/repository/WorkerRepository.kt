@@ -3,11 +3,12 @@ package com.upc.worktrace.data.repository
 import com.upc.worktrace.data.model.request.WorkerRequest
 import com.upc.worktrace.data.model.response.WorkerResponse
 import com.upc.worktrace.data.remote.RetrofitClient
+import retrofit2.Response
 
-class WorkerRepository(owner: String, baseUrl: String? = null) {
-    private val apiService = RetrofitClient.getClient(owner, baseUrl)
+class WorkerRepository(ownerName: String, baseUrl: String? = null) {
+    private val apiService = RetrofitClient.getClient(ownerName, baseUrl)
 
-    suspend fun registrarTrabajador(request: WorkerRequest): WorkerResponse {
+    suspend fun registrarTrabajador(request: WorkerRequest): Response<WorkerResponse> {
         return apiService.registrarTrabajador(request)
     }
 

@@ -5,17 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.upc.worktrace.data.model.entities.TipoContrato
 import com.upc.worktrace.data.repository.TipoContratoRepository
 import com.upc.worktrace.ui.adapter.SpinnerItem
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-@HiltViewModel
-class TipoContratoViewModel @Inject constructor() : ViewModel() {
+class TipoContratoViewModel : ViewModel() {
     private val repository = TipoContratoRepository("yhimy", null)
     private val TAG = "TipoContratoViewModel"
     
@@ -37,6 +33,7 @@ class TipoContratoViewModel @Inject constructor() : ViewModel() {
         viewModelScope.launch(Dispatchers.Main) {
             try {
                 _isLoading.value = true
+                Log.d(TAG, "Cargando tipos de contrato...")
                 
                 // Realizar la operación de red en un hilo de IO
                 val response = withContext(Dispatchers.IO) {
