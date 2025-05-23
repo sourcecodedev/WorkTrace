@@ -8,10 +8,14 @@ import android.widget.Toast
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import com.upc.worktrace.viewmodel.HorarioDetalleModel
+import com.upc.worktrace.viewmodel.WorkerViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 class AsignarHorariosActivity : BaseActivity() {
+
+    private lateinit var viewModel: HorarioDetalleModel
 
     private lateinit var etNombreTrabajador: AutoCompleteTextView
     private lateinit var cbLunes: CheckBox
@@ -143,6 +147,21 @@ class AsignarHorariosActivity : BaseActivity() {
 
         Toast.makeText(this, "Horario asignado correctamente", Toast.LENGTH_SHORT).show()
         finish()
+    }
+
+    private fun enviarHorarioAlServidor(idHorarioAsignacion:Int, dia:Int, horaEntrada:String, horaSalida:String) {
+        try {
+            viewModel.registrarHorarioDetalle(
+                idHorarioAsignacion.toString(),
+                dia.toString(),
+                horaEntrada,
+                horaSalida
+            )
+        } catch (e: Exception) {
+            Toast.makeText(this,
+                "Error al procesar los datos: ${e.message}",
+                Toast.LENGTH_LONG).show()
+        }
     }
 
 
