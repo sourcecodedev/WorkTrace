@@ -5,6 +5,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.CheckBox
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -36,7 +37,7 @@ class AsignarHorariosActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_asignar_horarios)
 
-
+        viewModel = ViewModelProvider(this)[HorarioDetalleModel::class.java]
         setupToolbar(true, "Asignar Horario")
 
 
@@ -142,7 +143,7 @@ class AsignarHorariosActivity : BaseActivity() {
 
 
         for (dia in diasSeleccionados) {
-
+            enviarHorarioAlServidor(idHorarioAsignacion, dia, horaEntrada, horaSalida)
         }
 
         Toast.makeText(this, "Horario asignado correctamente", Toast.LENGTH_SHORT).show()
