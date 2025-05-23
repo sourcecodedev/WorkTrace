@@ -1,5 +1,8 @@
 package com.upc.worktrace.data.model.request
 
-import com.upc.worktrace.data.model.entities.HorarioDetalle
-
-class HorarioDetalleRequest (val horarioDetalle: HorarioDetalle)
+data class HorarioDetalleRequest (
+    val idHorarioAsignacion: String,
+    val diaSemana: String,
+    val horaEntrada: String,
+    val horaSalida: String,
+)

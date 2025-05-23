@@ -54,8 +54,8 @@ interface ApiService {
     @POST("/v1/marcar-salida")
     suspend fun registrarSalida(@Body request: MarcarSalidaRequest): MarcarSalidaResponse
 
-    @POST("/v1/rastreo-asistencia")
-    suspend fun mostrarRastreo(@Body request: RastreoAsistenciaRequest): RastreoAsistenciaResponse
+    @GET("/v1/rastreo-asistencia")
+    suspend fun mostrarRastreo(@Path("idAsistencia") idAsistencia: Int): RastreoAsistenciaResponse
 
     // Endpoints de consulta
     @GET("api/tipotrabajo")
