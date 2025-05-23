@@ -4,7 +4,6 @@ import com.upc.worktrace.data.model.request.HorarioAsignacionRequest
 import com.upc.worktrace.data.model.request.HorarioDetalleRequest
 import com.upc.worktrace.data.model.request.LoginRequest
 import com.upc.worktrace.data.model.request.MarcarSalidaRequest
-import com.upc.worktrace.data.model.request.RastreoAsistenciaRequest
 import com.upc.worktrace.data.model.request.WorkerRequest
 import com.upc.worktrace.data.model.response.DistritoResponse
 import com.upc.worktrace.data.model.response.HorarioAsignacionResponse
@@ -44,7 +43,6 @@ interface ApiService {
     @DELETE("/api/worker/{id}")
     suspend fun eliminarTrabajador(@Path("id") trabajadorId: Int): WorkerResponse
 
-    // Gestión de Horarios
     @POST("/v1/horario-asignacion")
     suspend fun registrarHorarioAsignacion(@Body request: HorarioAsignacionRequest): HorarioAsignacionResponse
 
@@ -57,7 +55,6 @@ interface ApiService {
     @GET("/v1/rastreo-asistencia")
     suspend fun mostrarRastreo(@Path("idAsistencia") idAsistencia: Int): RastreoAsistenciaResponse
 
-    // Endpoints de consulta
     @GET("api/tipotrabajo")
     suspend fun listarTiposTrabajo(): TipoContratoResponse
 

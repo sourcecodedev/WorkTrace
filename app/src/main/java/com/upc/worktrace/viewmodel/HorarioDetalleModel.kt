@@ -1,5 +1,6 @@
 package com.upc.worktrace.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -37,8 +38,11 @@ class HorarioDetalleModel: ViewModel(){
                     horaSalida = horarioSalida
                 )
                 val resultado = repository.RegistrarHorarioDetalle(request)
+                Log.i("ok======>", request.toString())
+                Log.i("ok======>", resultado.toString())
                 _horarioDetalle.postValue(resultado)
             } catch (e: Exception) {
+                Log.i("error======>", e.message.toString())
                 _horarioDetalle.postValue(HorarioDetalleResponse(false, "Error: ${e.message}", null))
             } finally {
                 _cargando.value = false

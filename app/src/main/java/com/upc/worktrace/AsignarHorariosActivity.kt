@@ -145,9 +145,14 @@ class AsignarHorariosActivity : BaseActivity() {
         for (dia in diasSeleccionados) {
             enviarHorarioAlServidor(idHorarioAsignacion, dia, horaEntrada, horaSalida)
         }
-
-        Toast.makeText(this, "Horario asignado correctamente", Toast.LENGTH_SHORT).show()
-        finish()
+        viewModel.resultadoHorarioDetalle.observe(this) { resultado ->
+            if (resultado.success) {
+                Toast.makeText(this, "Horario asignado correctamente", Toast.LENGTH_SHORT).show()
+                finish()
+            } else {
+                Toast.makeText(this, resultado.message, Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun enviarHorarioAlServidor(idHorarioAsignacion:Int, dia:Int, horaEntrada:String, horaSalida:String) {

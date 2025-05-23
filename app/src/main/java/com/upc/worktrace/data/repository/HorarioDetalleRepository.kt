@@ -1,5 +1,6 @@
 package com.upc.worktrace.data.repository
 
+import android.util.Log
 import com.upc.worktrace.data.model.request.HorarioDetalleRequest
 import com.upc.worktrace.data.model.response.HorarioDetalleResponse
 import com.upc.worktrace.data.remote.RetrofitClient
