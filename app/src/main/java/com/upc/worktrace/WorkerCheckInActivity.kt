@@ -15,10 +15,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.*
 import com.google.android.material.button.MaterialButton
 import com.upc.worktrace.viewmodel.MarcarAsistenciaViewModel
+import com.upc.worktrace.viewmodel.RastreoUbicacionViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 class WorkerCheckInActivity : BaseActivity() {
+    companion object {
+        const val EXTRA_ID_TRABAJADOR = "id_trabajador"
+        const val EXTRA_ID_HORARIO = "id_horario_asignacion"
+    }
+
     private val TAG = "WorkerCheckInActivity"
     private lateinit var tvFecha: TextView
     private lateinit var tvHora: TextView
@@ -33,14 +39,20 @@ class WorkerCheckInActivity : BaseActivity() {
     private lateinit var locationCallback: LocationCallback
     private val LOCATION_PERMISSION_REQUEST_CODE = 1000
     private lateinit var viewModel: MarcarAsistenciaViewModel
+    private lateinit var rastreoViewModel: RastreoUbicacionViewModel
     private var currentLatitude: Double = 0.0
     private var currentLongitude: Double = 0.0
     private var currentLocationText: String = ""
+    private var idTrabajador: Int = 0
+    private var idHorarioAsignacion: Int = 0
+    private var lastLocationUpdate = 0L
+    private val MIN_UPDATE_INTERVAL = 30000L // 30 segundos entre actualizaciones
 
     private val locationRequest = LocationRequest.create().apply {
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        interval = 10000 // 10 segundos
-        fastestInterval = 5000 // 5 segundos
+        interval = 30000 // 30 segundos
+        fastestInterval = 15000 // 15 segundos
+        smallestDisplacement = 10f // 10 metros mínimo de desplazamiento
     }
 
     init {
@@ -61,9 +73,26 @@ class WorkerCheckInActivity : BaseActivity() {
         Log.d(TAG, "Iniciando WorkerCheckInActivity")
         setContentView(R.layout.activity_worker_check_in)
 
+        // Obtener IDs del intent
+        idTrabajador = intent.getIntExtra(EXTRA_ID_TRABAJADOR, 0)
+        idHorarioAsignacion = intent.getIntExtra(EXTRA_ID_HORARIO, 0)
+
+        Log.d(TAG, """
+            |┌────── Datos Recibidos ──────
+            |├── ID Trabajador: $idTrabajador
+            |└── ID Horario: $idHorarioAsignacion
+        """.trimMargin())
+
+        if (idTrabajador == 0 || idHorarioAsignacion == 0) {
+            Log.e(TAG, "Error: No se recibieron los IDs necesarios")
+            Toast.makeText(this, "Error: Datos de trabajador no disponibles", Toast.LENGTH_LONG).show()
+            finish()
+            return
+        }
+
         setupToolbar(true, "Marcar Entrada")
         initializeViews()
-        setupViewModel()
+        setupViewModels()
         setupCurrentDateTime()
         setupLocationServices()
         setupListeners()
@@ -71,9 +100,10 @@ class WorkerCheckInActivity : BaseActivity() {
         handler.post(updateTime)
     }
 
-    private fun setupViewModel() {
-        Log.d(TAG, "Configurando ViewModel")
+    private fun setupViewModels() {
+        Log.d(TAG, "Configurando ViewModels")
         viewModel = ViewModelProvider(this)[MarcarAsistenciaViewModel::class.java]
+        rastreoViewModel = ViewModelProvider(this)[RastreoUbicacionViewModel::class.java]
         
         viewModel.resultadoMarcacion.observe(this) { resultado ->
             Log.d(TAG, """
@@ -84,6 +114,8 @@ class WorkerCheckInActivity : BaseActivity() {
             """.trimMargin())
 
             if (resultado.success) {
+                // Registrar ubicación inicial
+                registrarRastreoUbicacion()
                 Toast.makeText(this, "Marcación registrada exitosamente", Toast.LENGTH_SHORT).show()
                 finish()
             } else {
@@ -91,13 +123,27 @@ class WorkerCheckInActivity : BaseActivity() {
             }
         }
 
-        viewModel.cargando.observe(this) { cargando ->
-            Log.d(TAG, "Estado de carga actualizado: $cargando")
-            btnMarcar.isEnabled = !cargando
-            if (cargando) {
-                // Aquí podrías mostrar un progress bar si lo deseas
-            }
+        rastreoViewModel.resultadoRastreo.observe(this) { resultado ->
+            Log.d(TAG, """
+                |┌────── Resultado de Rastreo ──────
+                |├── Éxito: ${resultado.success}
+                |├── Mensaje: ${resultado.message}
+                |└── Código: ${resultado.statusCode}
+            """.trimMargin())
         }
+
+        viewModel.cargando.observe(this) { cargando ->
+            btnMarcar.isEnabled = !cargando && currentLatitude != 0.0 && currentLongitude != 0.0
+        }
+    }
+
+    private fun registrarRastreoUbicacion() {
+        Log.d(TAG, "Registrando ubicación inicial en rastreo")
+        rastreoViewModel.registrarRastreo(
+            idAsistencia = 1, // Por defecto como solicitado
+            latitud = currentLatitude,
+            longitud = currentLongitude
+        )
     }
 
     private fun initializeViews() {
@@ -126,17 +172,29 @@ class WorkerCheckInActivity : BaseActivity() {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 locationResult.lastLocation?.let { location ->
-                    Log.d(TAG, """
-                        |┌────── Nueva Ubicación Recibida ──────
-                        |├── Latitud: ${location.latitude}
-                        |├── Longitud: ${location.longitude}
-                        |├── Precisión: ${location.accuracy} metros
-                        |└── Proveedor: ${location.provider}
-                    """.trimMargin())
-                    
-                    currentLatitude = location.latitude
-                    currentLongitude = location.longitude
-                    updateLocationUI(location)
+                    val currentTime = System.currentTimeMillis()
+                    if (currentTime - lastLocationUpdate >= MIN_UPDATE_INTERVAL) {
+                        lastLocationUpdate = currentTime
+                        
+                        Log.d(TAG, """
+                            |┌────── Nueva Ubicación Recibida ──────
+                            |├── Latitud: ${location.latitude}
+                            |├── Longitud: ${location.longitude}
+                            |├── Precisión: ${location.accuracy} metros
+                            |├── Proveedor: ${location.provider}
+                            |└── Tiempo desde última actualización: ${(currentTime - lastLocationUpdate) / 1000} segundos
+                        """.trimMargin())
+                        
+                        if (location.accuracy <= 20f) { // Solo actualizar si la precisión es mejor que 20 metros
+                            currentLatitude = location.latitude
+                            currentLongitude = location.longitude
+                            updateLocationUI(location)
+                        } else {
+                            Log.d(TAG, "Ubicación ignorada por baja precisión: ${location.accuracy} metros")
+                        }
+                    } else {
+                        Log.d(TAG, "Actualización ignorada: muy pronto desde la última (${(currentTime - lastLocationUpdate) / 1000} segundos)")
+                    }
                 }
             }
         }
@@ -209,9 +267,6 @@ class WorkerCheckInActivity : BaseActivity() {
 
     private fun setupListeners() {
         btnMarcar.setOnClickListener {
-            val idTrabajador = intent.getIntExtra("id_trabajador", 0)
-            val idHorarioAsignacion = intent.getIntExtra("id_horario_asignacion", 0)
-
             Log.d(TAG, """
                 |┌────── Datos para Marcación ──────
                 |├── ID Trabajador: $idTrabajador
@@ -222,12 +277,6 @@ class WorkerCheckInActivity : BaseActivity() {
                 |│   └── Texto: $currentLocationText
                 |└── Fecha/Hora: ${dateFormat.format(Date())} ${timeFormat.format(Date())}
             """.trimMargin())
-
-            if (idTrabajador == 0 || idHorarioAsignacion == 0) {
-                Log.e(TAG, "Error: Datos de trabajador no disponibles")
-                Toast.makeText(this, "Error: Datos de trabajador no disponibles", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
 
             viewModel.registrarMarcacion(
                 idTrabajador = idTrabajador,

@@ -6,6 +6,7 @@ import com.upc.worktrace.data.model.request.LoginRequest
 import com.upc.worktrace.data.model.request.MarcarAsistenciaRequest
 import com.upc.worktrace.data.model.request.MarcarSalidaRequest
 import com.upc.worktrace.data.model.request.RastreoAsistenciaRequest
+import com.upc.worktrace.data.model.request.RastreoUbicacionRequest
 import com.upc.worktrace.data.model.request.WorkerRequest
 import com.upc.worktrace.data.model.response.DistritoResponse
 import com.upc.worktrace.data.model.response.HorarioAsignacionResponse
@@ -14,6 +15,7 @@ import com.upc.worktrace.data.model.response.LoginResponse
 import com.upc.worktrace.data.model.response.MarcarAsistenciaResponse
 import com.upc.worktrace.data.model.response.MarcarSalidaResponse
 import com.upc.worktrace.data.model.response.RastreoAsistenciaResponse
+import com.upc.worktrace.data.model.response.RastreoUbicacionResponse
 import com.upc.worktrace.data.model.response.TipoContratoResponse
 import com.upc.worktrace.data.model.response.WorkerResponse
 import retrofit2.Response
@@ -56,9 +58,11 @@ interface ApiService {
     @GET("/v1/rastreo-asistencia")
     suspend fun mostrarRastreo(@Path("idAsistencia") idAsistencia: Int): RastreoAsistenciaResponse
 
-
     @POST("/v1/marcacion")
     suspend fun registrarMarcacionAsistencia(@Body request: MarcarAsistenciaRequest): MarcarAsistenciaResponse
+
+    @POST("v1/rastreoubicacion")
+    suspend fun registrarRastreoUbicacion(@Body request: RastreoUbicacionRequest): RastreoUbicacionResponse
 
     // Endpoints de consulta
     @Headers(
