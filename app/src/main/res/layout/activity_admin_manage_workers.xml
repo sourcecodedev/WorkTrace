@@ -15,7 +15,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="16dp"
@@ -23,7 +22,6 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="0dp">
-
 
         <TextView
             android:id="@+id/tvTitle"
@@ -36,7 +34,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <EditText
             android:id="@+id/etNombre"
@@ -75,10 +72,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle">
-
-
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvTrabajadores"
@@ -93,6 +87,31 @@
             app:layout_constraintTop_toBottomOf="@+id/cvHeader"
             app:layout_constraintVertical_bias="1.0"
             tools:listitem="@layout/item_trabajador" />
+
+        <TextView
+            android:id="@+id/tvEmptyState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No hay trabajadores registrados"
+            android:textSize="16sp"
+            android:textColor="?android:textColorSecondary"
+            android:visibility="gone"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="@id/rvTrabajadores"
+            app:layout_constraintBottom_toBottomOf="@id/rvTrabajadores"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="@id/rvTrabajadores"
+            app:layout_constraintBottom_toBottomOf="@id/rvTrabajadores"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <LinearLayout
             android:id="@+id/botonesLayout"

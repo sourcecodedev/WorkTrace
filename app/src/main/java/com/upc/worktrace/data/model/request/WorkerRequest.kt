@@ -25,5 +25,8 @@ data class WorkerRequest(
     val idDistritoTrabajo: Int,
     
     @SerializedName("id_usuario_creador")
-    val idUsuarioCreador: Int = 1
+    val idUsuarioCreador: Int = 1,
+    
+    @SerializedName("estado")
+    val estado: Int = 1
 )

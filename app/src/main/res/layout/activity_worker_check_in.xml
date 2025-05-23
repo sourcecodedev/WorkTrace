@@ -100,6 +100,7 @@
                     android:src="@drawable/ic_location_on_black_24dp"
                     app:tint="#2ECC40"/>
                 <TextView
+                    android:id="@+id/lvltextUbicacion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="15108 SMP"

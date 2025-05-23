@@ -277,7 +277,8 @@ class AdminAddWorkerActivity : AppCompatActivity() {
                 idTipoContrato = idTipoContrato,
                 direccion = direccion,
                 telefono = telefono,
-                idDistritoTrabajo = selectedDistritoId!!
+                idDistritoTrabajo = selectedDistritoId!!,
+                estado = 1 // Estado activo por defecto
             )
         } catch (e: Exception) {
             Toast.makeText(this, 

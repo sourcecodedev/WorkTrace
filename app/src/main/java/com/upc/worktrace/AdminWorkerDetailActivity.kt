@@ -27,7 +27,7 @@ class AdminWorkerDetailActivity : BaseActivity() {
             setContentView(R.layout.activity_admin_worker_detail)
             
 
-            val id = intent.getStringExtra("TRABAJADOR_ID") ?: "-"
+            val id = intent.getIntExtra("TRABAJADOR_ID", 0)
             val nombre = intent.getStringExtra("TRABAJADOR_NOMBRE") ?: "-"
             val rol = intent.getStringExtra("TRABAJADOR_ROL") ?: "-"
             val puesto = intent.getStringExtra("TRABAJADOR_PUESTO") ?: "-"
@@ -54,7 +54,7 @@ class AdminWorkerDetailActivity : BaseActivity() {
             btnAtras = findViewById(R.id.btnAtras)
             
 
-            tvId.text = id
+            tvId.text = "ID: $id"
             tvNombre.text = nombre
             tvRol.text = rol
             tvPuesto.text = puesto
@@ -69,16 +69,7 @@ class AdminWorkerDetailActivity : BaseActivity() {
                 try {
                     Log.d("DetallesTrabajador", "Botón editar presionado")
                     val intent = Intent(this, EditarTrabajadorActivity::class.java)
-                    intent.putExtra("TRABAJADOR_ID", id)
-                    intent.putExtra("TRABAJADOR_NOMBRE", nombre)
-                    intent.putExtra("TRABAJADOR_ROL", rol)
-                    intent.putExtra("TRABAJADOR_PUESTO", puesto)
-                    intent.putExtra("TRABAJADOR_JEFE", jefeInmediato)
-                    intent.putExtra("TRABAJADOR_CONTRATO", tipoContrato)
-                    intent.putExtra("TRABAJADOR_DIRECCION", direccion)
-                    intent.putExtra("TRABAJADOR_TELEFONO", telefono)
-                    intent.putExtra("TRABAJADOR_DISTRITO", distrito)
-                    Log.d("DetallesTrabajador", "Intent creado con datos del trabajador")
+                    intent.putExtra("idTrabajador", id)
                     startActivity(intent)
                 } catch (e: Exception) {
                     Log.e("DetallesTrabajador", "Error al abrir EditarTrabajadorActivity", e)

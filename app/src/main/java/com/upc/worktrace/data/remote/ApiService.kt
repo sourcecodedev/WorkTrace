@@ -3,6 +3,7 @@ package com.upc.worktrace.data.remote
 import com.upc.worktrace.data.model.request.HorarioAsignacionRequest
 import com.upc.worktrace.data.model.request.HorarioDetalleRequest
 import com.upc.worktrace.data.model.request.LoginRequest
+import com.upc.worktrace.data.model.request.MarcarAsistenciaRequest
 import com.upc.worktrace.data.model.request.MarcarSalidaRequest
 import com.upc.worktrace.data.model.request.RastreoAsistenciaRequest
 import com.upc.worktrace.data.model.request.WorkerRequest
@@ -10,6 +11,7 @@ import com.upc.worktrace.data.model.response.DistritoResponse
 import com.upc.worktrace.data.model.response.HorarioAsignacionResponse
 import com.upc.worktrace.data.model.response.HorarioDetalleResponse
 import com.upc.worktrace.data.model.response.LoginResponse
+import com.upc.worktrace.data.model.response.MarcarAsistenciaResponse
 import com.upc.worktrace.data.model.response.MarcarSalidaResponse
 import com.upc.worktrace.data.model.response.RastreoAsistenciaResponse
 import com.upc.worktrace.data.model.response.TipoContratoResponse
@@ -25,11 +27,8 @@ interface ApiService {
     @POST("/api/login/worker")
     suspend fun loginWorker(@Body request: LoginRequest): LoginResponse
 
-    // Gestión de Workers
-    @POST("/api/Worker/registrar")
-    suspend fun registrarWorker(@Body request: WorkerRequest): WorkerResponse
-
-    @GET("/api/worker")
+    // Gestión de Trabajadores
+    @GET("v1/Trabajador")
     suspend fun obtenerTodosTrabajadores(): WorkerResponse
 
     @GET("/api/worker/{id}")
@@ -41,8 +40,8 @@ interface ApiService {
         @Body request: WorkerRequest
     ): WorkerResponse
 
-    @DELETE("/api/worker/{id}")
-    suspend fun eliminarTrabajador(@Path("id") trabajadorId: Int): WorkerResponse
+    @DELETE("v1/Trabajador/{id_trabajador}")
+    suspend fun eliminarTrabajador(@Path("id_trabajador") trabajadorId: Int): WorkerResponse
 
     // Gestión de Horarios
     @POST("/v1/horario-asignacion")
@@ -57,6 +56,10 @@ interface ApiService {
     @GET("/v1/rastreo-asistencia")
     suspend fun mostrarRastreo(@Path("idAsistencia") idAsistencia: Int): RastreoAsistenciaResponse
 
+
+    @POST("/v1/marcacion")
+    suspend fun registrarMarcacionAsistencia(@Body request: MarcarAsistenciaRequest): MarcarAsistenciaResponse
+
     // Endpoints de consulta
     @Headers(
         "Accept: application/json",
@@ -67,6 +70,7 @@ interface ApiService {
 
     @GET("v1/DistritoTrabajo")
     suspend fun listarDistritos(): Response<DistritoResponse>
+
     @POST("v1/Trabajador")
     suspend fun registrarTrabajador(@Body request: WorkerRequest): Response<WorkerResponse>
 }
