@@ -4,7 +4,7 @@ enum class ApiOwner(val baseUrl: String) {
     PROD("https://worktrace-api.azurewebsites.net/"),
     DEV("http://10.0.2.2:5087/"),
     LOCAL("http://192.168.1.36:5087/"),
-    EVER("https://7e262d6b-4e52-4216-83bb-e4dd71c75c56.mock.pstmn.io"),
+    EVER("https://jnu4oitdc2.execute-api.us-east-1.amazonaws.com"),
     GENERAL("https://mock-c4159884c5b24c80a095d43fed1b1c16.mock.insomnia.rest/"),
     yhimy("https://20mpw85kof.execute-api.us-east-1.amazonaws.com/");
 

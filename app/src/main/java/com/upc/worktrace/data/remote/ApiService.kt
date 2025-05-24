@@ -52,7 +52,7 @@ interface ApiService {
     @POST("/v1/horario-detalle")
     suspend fun registrarHorarioDetalle(@Body request: HorarioDetalleRequest): HorarioDetalleResponse
 
-    @POST("/v1/marcar-salida")
+    @POST("/v1/marcar-salidar")
     suspend fun registrarSalida(@Body request: MarcarSalidaRequest): MarcarSalidaResponse
 
     @GET("/v1/rastreo-asistencia")

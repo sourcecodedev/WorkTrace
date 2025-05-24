@@ -18,7 +18,7 @@ class MarcarSalidaActivity : AppCompatActivity() {
     private lateinit var tvFecha: TextView
     private lateinit var tvHora: TextView
     private val handler = Handler(Looper.getMainLooper())
-    private val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale("es"))
+    private val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale("es"))
     private val timeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
     private val timeZone = TimeZone.getTimeZone("America/Lima")
     private lateinit var btnMarcarSalida: MaterialButton
@@ -29,7 +29,8 @@ class MarcarSalidaActivity : AppCompatActivity() {
     private val updateTime = object : Runnable {
         override fun run() {
             val currentTime = Calendar.getInstance(timeZone)
-            tvFecha.text = dateFormat.format(currentTime.time)
+            val fecha = Date()
+            tvFecha.text = dateFormat.format(fecha)
             tvHora.text = timeFormat.format(currentTime.time)
             handler.postDelayed(this, 1000)
         }
@@ -45,13 +46,13 @@ class MarcarSalidaActivity : AppCompatActivity() {
 
         btnMarcarSalida.setOnClickListener {
             marcarSalidaViewModel.registrarSalida(
-                idAsistencia = "A001", // ID real o dinámico
+                idAsistencia = "1",
                 tipoMarcacion = "SALIDA",
-                fechaMarcacion = tvFecha.text.toString(),
+                fechaMarcacion = "24/05/2025",
                 horaMarcacion = tvHora.text.toString(),
-                latitud = "-12.0464", // Coordenadas simuladas o GPS real
+                latitud = "-12.0464",
                 longitud = "-77.0428",
-                ubicacion = "Lima, Perú",
+                ubicacion = "Av. Arequipa 1234, Lima",
                 fuente = "APP"
             )
         }
