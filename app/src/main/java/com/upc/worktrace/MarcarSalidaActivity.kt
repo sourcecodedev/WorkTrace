@@ -48,7 +48,7 @@ class MarcarSalidaActivity : AppCompatActivity() {
             marcarSalidaViewModel.registrarSalida(
                 idAsistencia = "1",
                 tipoMarcacion = "SALIDA",
-                fechaMarcacion = "24/05/2025",
+                fechaMarcacion = "2025/05/24",
                 horaMarcacion = tvHora.text.toString(),
                 latitud = "-12.0464",
                 longitud = "-77.0428",
